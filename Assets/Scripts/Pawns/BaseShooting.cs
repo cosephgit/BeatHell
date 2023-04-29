@@ -11,6 +11,8 @@ public class BaseShooting : MonoBehaviour
     [SerializeField]private ShotDetails shotDetails;
     [Header("magazine must be reference to a real object")]
     [SerializeField]private BaseMagazine magazine;
+    [SerializeField]private Color shotColor = Color.yellow;
+    [SerializeField]private Layer shotLayer = Layer.EnemyBullet;
     private int beatFracsSinceShot;
     private float[] shotAngles;
     protected bool shooting = false;
@@ -58,7 +60,7 @@ public class BaseShooting : MonoBehaviour
 
                 if (shot)
                 {
-                    bulletFired.Shoot(transform.position, bulletRotation, shot.shotDamage, shot.shotColor, shot.shotSpeed, shot.shotLife, shot.layer);
+                    bulletFired.Shoot(transform.position, bulletRotation, shot, shotColor, shotLayer);
                     ShotFired();
                 }
             }

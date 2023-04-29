@@ -45,7 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <shotDamage>k__BackingField: 1
-  <shotColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
   <shotSpeed>k__BackingField: 8
-  <shotLife>k__BackingField: 1
-  <layer>k__BackingField: 11
+  <shotLife>k__BackingField: 3

@@ -19,6 +19,11 @@ public class PlayerMagazine : BaseMagazine
         }
     }
 
+    void Start()
+    {
+        UIManager.instance.magazine.SetShots(shots.Count);
+    }
+
     public override Shot GetShot()
     {
         if (shots.Count > 0)
@@ -26,6 +31,7 @@ public class PlayerMagazine : BaseMagazine
             // take the shot at the start of the list
             Shot shotReturn = shots[0];
             shots.RemoveAt(0);
+            UIManager.instance.magazine.Shoot();
             return shotReturn;
         }
         return null;
@@ -34,5 +40,6 @@ public class PlayerMagazine : BaseMagazine
     public override void AddShot(Shot shotAdd)
     {
         shots.Add(shotAdd);
+        UIManager.instance.magazine.SetShots(shots.Count);
     }
 }

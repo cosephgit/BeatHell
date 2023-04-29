@@ -8,7 +8,7 @@ public class EnemyPawnSpawner : MonoBehaviour
 {
     [SerializeField]private GameObject enemyPrefab;
     [SerializeField]private int enemyBeatFracDelay = 4; // how many beat fractions between spawns
-    [SerializeField]private int enemySpawnCount = 4;
+    [SerializeField]private int enemySpawnMax = 4;
     [SerializeField]private float rotationIncrement = 0f; // the degrees of rotation after each spawn
     private int beatFracCount = 0;
     private int enemySpawns = 0;
@@ -30,10 +30,12 @@ public class EnemyPawnSpawner : MonoBehaviour
         {
             Instantiate(enemyPrefab, transform.position, transform.rotation);
             enemySpawns++;
-            if (enemySpawns < enemySpawnCount)
+            if (enemySpawns < enemySpawnMax)
             {
                 transform.Rotate(0, 0, rotationIncrement);
                 beatFracCount = 0;
+                // TODO TEMP TESTING FEATURE
+                UIManager.instance.waveMarker.UpdateWave(enemySpawns);
             }
             else
                 Destroy(gameObject);

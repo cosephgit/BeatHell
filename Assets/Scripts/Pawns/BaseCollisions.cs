@@ -8,11 +8,12 @@ using UnityEngine;
 
 public class BaseCollisions : MonoBehaviour
 {
-    [SerializeField]private SpriteRenderer sprite;
+    [SerializeField]protected SpriteRenderer sprite;
     [SerializeField]private Collider2D colliderPhysics;
-    [SerializeField]private int healthMax = 1;
-    private int health;
-    private bool alive;
+    [SerializeField]protected int healthMax = 1;
+    [SerializeField]private int scoreKill = 10;
+    protected int health;
+    protected bool alive;
 
     private void Awake()
     {
@@ -27,17 +28,23 @@ public class BaseCollisions : MonoBehaviour
             Bullet bullet = other.gameObject.GetComponent<Bullet>();
             if (bullet)
             {
-                health -= bullet.damage;
-                Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
-                if (health <= 0) Death();
+                BulletHit(bullet);
             }
         }
     }
 
-    private void Death()
+    protected virtual void BulletHit(Bullet bullet)
+    {
+        health -= bullet.damage;
+        Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
+        if (health <= 0) Death();
+    }
+
+    protected virtual void Death()
     {
         EffectTimed pop = Instantiate(PrefabProvider.instance.particlePop, transform.position, PrefabProvider.instance.particlePop.transform.rotation);
         pop.Trigger(sprite.color, transform.localScale);
+        GameManager.instance.AddScore(scoreKill);
         Destroy(gameObject);
     }
 }

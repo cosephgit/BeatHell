@@ -184,6 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotDetails: {fileID: 8967041440092921819, guid: 6ca4f1a091cc01f4e8a20698be6a62ac, type: 3}
   magazine: {fileID: 245251826999776733}
+  shotColor: {r: 1, g: 0, b: 0, a: 1}
+  shotLayer: 11
 --- !u!1001 &5586884137518772399
 PrefabInstance:
   m_ObjectHideFlags: 0

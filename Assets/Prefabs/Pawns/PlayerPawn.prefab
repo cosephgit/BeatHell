@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 1440800962450836030}
   - component: {fileID: 1440800962450836028}
   - component: {fileID: 516847487}
-  - component: {fileID: 516847488}
+  - component: {fileID: 9129509525900828398}
   - component: {fileID: 1440800962450836025}
   - component: {fileID: 516847494}
   m_Layer: 12
@@ -256,7 +256,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &516847488
+--- !u!114 &9129509525900828398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,12 +265,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1440800962450836024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f65964f4088d684a85b558744ee9a84, type: 3}
+  m_Script: {fileID: 11500000, guid: d2a6a3cb17b2ec54eaa518bc44b23a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 1440800962450836030}
   colliderPhysics: {fileID: 516847487}
-  healthMax: 1
+  healthMax: 10
+  magazine: {fileID: 7356879910471378545}
 --- !u!114 &1440800962450836025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotDetails: {fileID: 8967041440092921819, guid: f5f2818030c545344b4fa9dab3fe8007, type: 3}
   magazine: {fileID: 7356879910471378545}
+  shotColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  shotLayer: 10
   shootSound: {fileID: 798355791}
 --- !u!1001 &8494051105854380592
 PrefabInstance:
