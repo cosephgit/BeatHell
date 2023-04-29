@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7637216411583808927}
   - component: {fileID: 8967041440092921819}
   m_Layer: 0
-  m_Name: EnemyBullet
+  m_Name: EnemyShotType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,8 +48,4 @@ MonoBehaviour:
   <beatFracsPerShot>k__BackingField: 2
   <shotCount>k__BackingField: 1
   <cone>k__BackingField: 0
-  <shotDamage>k__BackingField: 1
-  <shotColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  <shotSpeed>k__BackingField: 10
-  <shotLife>k__BackingField: 2
-  <layer>k__BackingField: 11
+  <magazine>k__BackingField: {fileID: 0}

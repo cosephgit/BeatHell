@@ -13,8 +13,12 @@ public class PlayerShooting : BaseShooting
     protected override void Shoot()
     {
         base.Shoot();
+        if (!Input.GetButton("Fire1")) shooting = false; // stop shooting now that at least one shot attempt has been fired
+    }
+
+    protected override void ShotFired()
+    {
         shootSound.Play();
-        shooting = false; // only stop shooting after the beat, to let the player tap and shoot once
     }
 
     // Update is called once per frame

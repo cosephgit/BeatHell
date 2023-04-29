@@ -31,10 +31,6 @@ public class EnemyMovement : BaseMovement
         {
             Debug.LogError(gameObject + " EnemyMovement is set up wrong, only processing the complete " + moveCount + " move pattern steps");
         }
-        else
-        {
-            Debug.Log(gameObject + " has " + moveCount + " moves");
-        }
     }
 
     private void Start()

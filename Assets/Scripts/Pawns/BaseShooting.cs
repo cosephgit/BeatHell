@@ -7,7 +7,10 @@ using UnityEngine;
 
 public class BaseShooting : MonoBehaviour
 {
+    [Header("shotDetails is just a prefab data reference")]
     [SerializeField]private ShotDetails shotDetails;
+    [Header("magazine must be reference to a real object")]
+    [SerializeField]private BaseMagazine magazine;
     private int beatFracsSinceShot;
     private float[] shotAngles;
     protected bool shooting = false;
@@ -51,10 +54,21 @@ public class BaseShooting : MonoBehaviour
                 float fireAngle = shotFacing + transform.eulerAngles.z + shotAngles[i];
                 Quaternion bulletRotation = Quaternion.Euler(0, 0, fireAngle);
                 Bullet bulletFired = BulletLibrary.instance.GetBullet();
+                Shot shot = magazine.GetShot();
 
-                bulletFired.Shoot(transform.position, bulletRotation, shotDetails.shotDamage, shotDetails.shotColor, shotDetails.shotSpeed, shotDetails.shotLife, shotDetails.layer);
+                if (shot)
+                {
+                    bulletFired.Shoot(transform.position, bulletRotation, shot.shotDamage, shot.shotColor, shot.shotSpeed, shot.shotLife, shot.layer);
+                    ShotFired();
+                }
             }
         }
+    }
+
+    // called when a shot is successfully fired
+    protected virtual void ShotFired()
+    {
+
     }
 
     private void OnDestroy()
