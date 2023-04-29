@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <beatFracsOffset>k__BackingField: 0
-  <beatFracsPerShot>k__BackingField: 1
+  <beatFracsPerShot>k__BackingField: 2
   <shotCount>k__BackingField: 1
   <cone>k__BackingField: 0
   <shotDamage>k__BackingField: 1

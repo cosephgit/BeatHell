@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 157031717646912052}
   - component: {fileID: 1284409164779648887}
   - component: {fileID: 1284409164779648904}
-  - component: {fileID: 1284409164779648881}
-  - component: {fileID: 1284409164779648886}
+  - component: {fileID: 2568316614503461287}
+  - component: {fileID: 6648171180279996040}
   m_Layer: 13
   m_Name: EnemyPawn
   m_TagString: Untagged
@@ -138,8 +138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f65964f4088d684a85b558744ee9a84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 157031717646912054}
   colliderPhysics: {fileID: 1284409164779648887}
---- !u!114 &1284409164779648881
+  healthMax: 1
+--- !u!114 &2568316614503461287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,12 +150,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 157031717646912048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d55415c16471854886cf3729cf5d4cd, type: 3}
+  m_Script: {fileID: 11500000, guid: f77b5bc780f131242afaca1c95aca1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
   body: {fileID: 157031717646912052}
---- !u!114 &1284409164779648886
+  moveMags:
+  - {x: 0, y: 1}
+  - {x: 1, y: 0}
+  - {x: 0, y: -1}
+  - {x: -1, y: 0}
+  moveBeatFracs: 02000000020000000200000002000000
+  moveTurns:
+  - 45
+  - 45
+  - 45
+  - 45
+  moveLerp: 00000000
+  moveShoot: 00000000
+  loop: 1
+--- !u!114 &6648171180279996040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,7 +178,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 157031717646912048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17f70168a387a734fa5c1ef547b31129, type: 3}
+  m_Script: {fileID: 11500000, guid: 3af94f409bbe24f4baa32752bef9e5bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shotDetails: {fileID: 8967041440092921819, guid: 6ca4f1a091cc01f4e8a20698be6a62ac, type: 3}

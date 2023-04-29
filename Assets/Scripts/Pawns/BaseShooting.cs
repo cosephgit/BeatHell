@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // the basic shooting class for pawns
-
-/*
-ok so what does this need?
-frames between shots (EVERYTHING IN FRAMES!)
-*/
+// this class must be resilient to being destroyed by another class
 
 public class BaseShooting : MonoBehaviour
 {
@@ -61,24 +57,32 @@ public class BaseShooting : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        BeatManager.onBeatFrac -= BeatFractionShoot;
+    }
+
     // called every beat fraction
     private void BeatFractionShoot(int count)
     {
-        if (beatFracsSinceShot == 0)
+        if (isActiveAndEnabled)
         {
-            if (shooting)
+            if (beatFracsSinceShot == 0)
             {
-                Shoot();
+                if (shooting)
+                {
+                    Shoot();
+                    beatFracsSinceShot++;
+                }
+            }
+            else
+            {
                 beatFracsSinceShot++;
             }
-        }
-        else
-        {
-            beatFracsSinceShot++;
-        }
-        if (beatFracsSinceShot == shotDetails.beatFracsPerShot)
-        {
-            beatFracsSinceShot = 0;
+            if (beatFracsSinceShot == shotDetails.beatFracsPerShot)
+            {
+                beatFracsSinceShot = 0;
+            }
         }
     }
 }
