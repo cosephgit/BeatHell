@@ -3,25 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // manages playing music, registering it's events to the BeatManager during Start
+// singleton - as well as playing the standard music track, this plays extra sounds sent by enemy spawners and other events
 
 // TODO work out how to store the music data, which instruments, how to write the music into the game, etc
 
 public class MusicManager : MonoBehaviour
 {
     // these are the instrument sounds to be played
-    [SerializeField]private AudioSource instClap;
-    [SerializeField]private AudioSource instHiHat;
-    [SerializeField]private AudioSource instKick;
-    [SerializeField]private AudioSource instSnare;
+    [Header("Music settings")]
+    [SerializeField]private AudioSource player; // the sound player for this music player
+    [Tooltip("Index 0 should be null")]
+    [SerializeField]private AudioClip[] instruments; // an array of instruments which this music player has
+    [Tooltip("Index 0 is always no instrument")]
+    [SerializeField]private int[] sheetMusic; // an array of instrument indices, in order of playing indexed by beat fraction
+    private int beatFracCount;
+    protected bool playing = true; // start playing by default
 
-    private void Start()
+    // register beat events
+    protected virtual void Start()
     {
+        beatFracCount = 0;
         BeatManager.onBeatFrac += MusicBeatFraction;
         BeatManager.onBeat += MusicBeat;
         BeatManager.onBar += MusicBar;
     }
 
-    // make sure to register the events
+    // make sure to deregister the events
     private void OnDestroy()
     {
         BeatManager.onBeatFrac -= MusicBeatFraction;
@@ -29,18 +36,25 @@ public class MusicManager : MonoBehaviour
         BeatManager.onBar -= MusicBar;
     }
 
-    private void MusicBeatFraction(int count)
+    protected virtual void MusicBeatFraction(int count)
     {
-
+        if (playing)
+        {
+            if (sheetMusic[beatFracCount] > 0)
+            {
+                player.PlayOneShot(instruments[sheetMusic[beatFracCount]]);
+            }
+            beatFracCount++;
+            // loop
+            if (beatFracCount >= sheetMusic.Length) beatFracCount = 0;
+        }
     }
 
-    private void MusicBeat(int count)
+    protected virtual void MusicBeat(int count)
     {
-        instKick.Play();
     }
 
-    private void MusicBar()
+    protected virtual void MusicBar()
     {
-        instSnare.Play();
     }
 }

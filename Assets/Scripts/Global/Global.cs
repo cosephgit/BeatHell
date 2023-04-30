@@ -13,6 +13,6 @@ public enum Layer
 
 public static class Global
 {
-    public const float BULLETSCALE = 0.4f;
+    public const float BULLETSCALE = 0.3f;
     public const float BULLETSCALEPERDAM = 0.1f;
 }
