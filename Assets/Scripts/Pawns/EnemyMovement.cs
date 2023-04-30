@@ -13,24 +13,19 @@ public enum Pattern
 
 public class EnemyMovement : BaseMovement
 {
-    [SerializeField]private Vector2[] moveMags; // this array contains the movement magnitudes at each step of the movement pattern
-    [SerializeField]private int[] moveBeatFracs; // how many beats the matching moveDirections entry is maintained for
-    [SerializeField]private float[] moveTurns; // the number of degrees to turn over moveBeats TODO implement
-    [SerializeField]private bool[] moveLerp; // if true, the Mags and Turns are lerped in over moveBeats TODO implement
-    [SerializeField]private bool[] moveShoot; // if true, shoot during this move TODO implement
-    [SerializeField]private bool loop = true; // keep looping the pattern indefinitely
-    private int moveCount;
+    private BaseStrategy strategy;
+    //private int moveCount;
     private int moveStep = 0;
     private int beatFracCount = 0;
 
     protected override void Awake()
     {
         base.Awake();
-        moveCount = Mathf.Min(moveMags.Length, moveBeatFracs.Length, moveTurns.Length, moveLerp.Length, moveShoot.Length);
-        if (Mathf.Max(moveMags.Length, moveBeatFracs.Length, moveTurns.Length, moveLerp.Length, moveShoot.Length) > moveCount)
-        {
-            Debug.LogError(gameObject + " EnemyMovement is set up wrong, only processing the complete " + moveCount + " move pattern steps");
-        }
+        //moveCount = Mathf.Min(moveMags.Length, moveBeatFracs.Length, moveTurns.Length, moveLerp.Length, moveShoot.Length);
+        //if (Mathf.Max(moveMags.Length, moveBeatFracs.Length, moveTurns.Length, moveLerp.Length, moveShoot.Length) > moveCount)
+        //{
+        //    Debug.LogError(gameObject + " EnemyMovement is set up wrong, only processing the complete " + moveCount + " move pattern steps");
+        //}
     }
 
     private void Start()
@@ -40,14 +35,10 @@ public class EnemyMovement : BaseMovement
 
     private void Update()
     {
-        if (moveStep < moveCount)
+        if (moveStep < strategy.count)
         {
-            if (moveTurns[moveStep] != 0f && moveLerp[moveStep])
-            {
-                float turn = moveTurns[moveStep] * Time.fixedDeltaTime;
-                transform.Rotate(0, 0, turn);
-            }
-            move = moveMags[moveStep];
+            transform.Rotate(0, 0, strategy.TurnGradual(moveStep));
+            move = strategy.Move(moveStep);
         }
         else
             move = Vector2.zero;
@@ -64,14 +55,14 @@ public class EnemyMovement : BaseMovement
         if (isActiveAndEnabled)
         {
             beatFracCount++;
-            if (beatFracCount >= moveBeatFracs[moveStep])
+            if (beatFracCount >= strategy.StepBeatFracs(moveStep))
             {
                 beatFracCount = 0;
                 moveStep++;
 
-                if (moveStep >= moveCount)
+                if (moveStep >= strategy.count)
                 {
-                    if (loop)
+                    if (strategy.loop)
                     {
                         moveStep = 0;
                     }
@@ -79,11 +70,14 @@ public class EnemyMovement : BaseMovement
                 }
 
                 // if not lerping, snap by the new turn angle
-                if (moveTurns[moveStep] != 0f && !moveLerp[moveStep])
-                {
-                    transform.Rotate(0, 0, moveTurns[moveStep]);
-                }
+                transform.Rotate(0, 0, strategy.TurnInstant(moveStep));
             }
         }
+    }
+
+    // called after spawning this pawn to set the strategy, should be done immediately on spawning!
+    public void SetStrategy(BaseStrategy stratNew)
+    {
+        strategy = stratNew;
     }
 }

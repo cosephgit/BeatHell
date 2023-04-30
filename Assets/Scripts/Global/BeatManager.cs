@@ -21,7 +21,7 @@ public class BeatManager : MonoBehaviour
     [SerializeField]private int startBPM = 90;
     [SerializeField]private int beatsPerBar = 4; // number of beats per bar
     [SerializeField]private int beatFracPerBeat = 2; // number of fractions that each beat is split into
-    private int beatFracFrames = 10; // the number of frames per fraction of a beat
+    public static int beatFracFrames { get; private set; } = 10; // the number of fixed update frames per fraction of a beat
     private int frameCount = 0;
     private int beatFraction = 0;
     private int beat = 0;

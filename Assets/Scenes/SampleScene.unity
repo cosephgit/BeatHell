@@ -917,6 +917,7 @@ MonoBehaviour:
   enemyBeatFracDelay: 8
   enemySpawnMax: 4
   rotationIncrement: 45
+  spawnStrategy: {fileID: 3859886326524462783, guid: 22b17edecb733ec4ea6365cacaa79971, type: 3}
 --- !u!4 &346724648
 Transform:
   m_ObjectHideFlags: 0
@@ -1814,6 +1815,7 @@ MonoBehaviour:
   enemyBeatFracDelay: 8
   enemySpawnMax: 4
   rotationIncrement: 45
+  spawnStrategy: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
 --- !u!82 &999185562
 AudioSource:
   m_ObjectHideFlags: 0
