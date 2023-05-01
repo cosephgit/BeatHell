@@ -15,4 +15,10 @@ public static class Global
 {
     public const float BULLETSCALE = 0.3f;
     public const float BULLETSCALEPERDAM = 0.1f;
+    private const string LAYERENEMYBULLET = "EnemyBullet";
+
+    public static LayerMask LayerEnemyBullet()
+    {
+        return LayerMask.GetMask(LAYERENEMYBULLET);
+    }
 }

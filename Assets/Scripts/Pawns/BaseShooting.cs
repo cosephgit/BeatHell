@@ -79,7 +79,7 @@ public class BaseShooting : MonoBehaviour
     }
 
     // called every beat fraction
-    private void BeatFractionShoot(int count)
+    protected virtual void BeatFractionShoot(int count)
     {
         if (isActiveAndEnabled)
         {

@@ -7,6 +7,9 @@ using UnityEngine;
 public class PlayerMagazine : BaseMagazine
 {
     [SerializeField]private int shotsStart = 20;
+    [SerializeField]private int shotCapacity = 50;
+    [SerializeField]private Color shotExplosionColor = Color.yellow;
+    [SerializeField]private Layer shotExplosionLayer = Layer.PlayerBullet;
     private List<Shot> shots;
 
     void Awake()
@@ -40,6 +43,22 @@ public class PlayerMagazine : BaseMagazine
     public override void AddShot(Shot shotAdd)
     {
         shots.Add(shotAdd);
+        if (shots.Count >= shotCapacity)
+        {
+            float angle = transform.eulerAngles.z;
+            float angleStep = 360 / shots.Count;
+            // MASSIVE BULLET EXPLOSION!!!
+            for (int i = shots.Count - 1; i >= 0; i--)
+            {
+                Quaternion bulletRotation = Quaternion.Euler(0, 0, angle);
+                Bullet bulletFired = BulletLibrary.instance.GetBullet();
+
+                bulletFired.Shoot(transform.position, bulletRotation, shots[i], shotExplosionColor, shotExplosionLayer);
+
+                shots.RemoveAt(i);
+                angle += angleStep;
+            }
+        }
         UIManager.instance.magazine.SetShots(shots.Count);
     }
 }
