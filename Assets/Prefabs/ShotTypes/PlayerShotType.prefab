@@ -45,11 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <beatFracsOffset>k__BackingField: 0
-  <beatFracsPerShot>k__BackingField: 2
+  <beatFracsPerShot>k__BackingField: 1
   <shotCount>k__BackingField: 1
   <cone>k__BackingField: 0
-  <shotDamage>k__BackingField: 1
-  <shotColor>k__BackingField: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  <shotSpeed>k__BackingField: 12
-  <shotLife>k__BackingField: 2
-  <layer>k__BackingField: 10

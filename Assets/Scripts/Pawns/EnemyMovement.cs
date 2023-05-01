@@ -5,14 +5,9 @@ using UnityEngine;
 // this class handles enemy movement
 // TODO add a bunch of different movement patterns
 
-public enum Pattern
-{
-    Line,
-    Circle
-}
-
 public class EnemyMovement : BaseMovement
 {
+    private Vector2 origin; // the point that this enemy is initially placed at, this is used by certain strategies
     private BaseStrategy strategy;
     //private int moveCount;
     private int moveStep = 0;
@@ -21,11 +16,7 @@ public class EnemyMovement : BaseMovement
     protected override void Awake()
     {
         base.Awake();
-        //moveCount = Mathf.Min(moveMags.Length, moveBeatFracs.Length, moveTurns.Length, moveLerp.Length, moveShoot.Length);
-        //if (Mathf.Max(moveMags.Length, moveBeatFracs.Length, moveTurns.Length, moveLerp.Length, moveShoot.Length) > moveCount)
-        //{
-        //    Debug.LogError(gameObject + " EnemyMovement is set up wrong, only processing the complete " + moveCount + " move pattern steps");
-        //}
+        origin = transform.position;
     }
 
     private void Start()
@@ -33,15 +24,24 @@ public class EnemyMovement : BaseMovement
         BeatManager.onBeatFrac += BeatFractionMove;
     }
 
-    private void Update()
+    protected override void FixedUpdate()
     {
         if (moveStep < strategy.count)
         {
+            float originRotate = strategy.RotateOrigin(moveStep);
+
+            if (originRotate != 0)
+            {
+                transform.RotateAround(origin, Vector3.forward, originRotate);
+            }
+
             transform.Rotate(0, 0, strategy.TurnGradual(moveStep));
             move = strategy.Move(moveStep);
         }
         else
             move = Vector2.zero;
+
+        base.FixedUpdate();
     }
 
     private void OnDestroy()

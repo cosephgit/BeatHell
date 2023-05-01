@@ -13,6 +13,7 @@ public class EnemyPawnSpawner : MusicManager
     [SerializeField]private int enemySpawnMax = 4;
     [SerializeField]private float rotationIncrement = 0f; // the degrees of rotation after each spawn
     [SerializeField]private BaseStrategy spawnStrategy; // the prefab strategy that the spawns should start with
+    [SerializeField]private int spawnStrength;
     private int beatFracCountSpawn = 0; // independent counter for spawning enemies
     private int enemySpawns = 0;
     private int barCount = 0;
@@ -31,7 +32,7 @@ public class EnemyPawnSpawner : MusicManager
             beatFracCountSpawn++;
             if (beatFracCountSpawn == enemyBeatFracDelay)
             {
-                GameObject enemySpawn = Instantiate(PrefabProvider.instance.enemyPrefab, transform.position, transform.rotation);
+                GameObject enemySpawn = Instantiate(PrefabProvider.instance.enemyPrefab[spawnStrength], transform.position, transform.rotation);
                 EnemyMovement enemySpawnMove = enemySpawn.GetComponent<EnemyMovement>();
                 if (enemySpawnMove)
                 {

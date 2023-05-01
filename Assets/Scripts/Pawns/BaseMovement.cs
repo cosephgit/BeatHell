@@ -18,7 +18,7 @@ public class BaseMovement : MonoBehaviour
         speedTick = speed * Time.fixedDeltaTime;
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (move.magnitude > 0)
         {

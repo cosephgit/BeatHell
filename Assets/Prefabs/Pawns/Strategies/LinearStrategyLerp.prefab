@@ -48,14 +48,19 @@ MonoBehaviour:
   <count>k__BackingField: 4
   moveMags:
   - {x: 0, y: 1}
-  - {x: 1, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   - {x: 0, y: -1}
-  - {x: -1, y: 0}
-  moveBeatFracs: 02000000020000000200000002000000
+  moveBeatFracs: 04000000020000000200000004000000
   moveTurns:
-  - 45
-  - 45
-  - 45
-  - 45
-  moveLerp: 01010101
+  - 0
+  - 0
+  - 0
+  - 0
+  moveRotate:
+  - 0
+  - 40
+  - -20
+  - 50
+  moveLerp: 00000000
   moveShoot: 00000000

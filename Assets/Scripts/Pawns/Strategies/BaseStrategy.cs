@@ -16,14 +16,22 @@ public class BaseStrategy : MonoBehaviour
     {
         return 0f;
     }
+    // returns the turning for one frame of movement if lerping is on
     public virtual float TurnGradual(int step)
     {
         return 0f;
     }
+    // returns the number of degrees the enemy should rotate relative to the enemy origin in one frame
+    public virtual float RotateOrigin(int step)
+    {
+        return 0;
+    }
+    // returns the x,y movement vector
     public virtual Vector2 Move(int step)
     {
         return Vector2.zero;
     }
+    // returns the number of beat fractions for the current movement step
     public virtual int StepBeatFracs(int step)
     {
         return 0;
