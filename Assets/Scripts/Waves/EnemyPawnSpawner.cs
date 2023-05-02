@@ -44,8 +44,6 @@ public class EnemyPawnSpawner : MusicManager
                 {
                     transform.Rotate(0, 0, rotationIncrement);
                     beatFracCountSpawn = 0;
-                    // TODO TEMP TESTING FEATURE
-                    UIManager.instance.waveMarker.UpdateWave(enemySpawns);
                 }
             }
         }

@@ -12,14 +12,21 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]private int waveCount = 4; // number of waves in the stage
     [SerializeField]private int waveBarPause = 8; // number of bars that play between each wave
     [SerializeField]private int stageBarStart = 1; // number of bars before the first spawn
+    /*
+    How random numbers work in this script.
+    Each stage has a stageSeed
+    Before spawning each wave, the random seed is set with stageSeed + waveCountSpawned
+    The reason for this is to allow Random.Range calls outside of this script to be made (for cosmetic reasons) but for THIS script to have level generation
+    that ALWAYS has the same (randomly determined) result for any given stageSeedBase.
+
+    An alternative approach for this is to pregenerate all the wave indices at the start of the stage during Start
+    */
     [SerializeField]private int stageSeed = 0; // the original random seed to be used for this stage
-    private Random.State stageSeedState;
     private int barCounter = 0;
+    private int waveCountSpawned = 0;
 
     private void Awake()
     {
-        Random.InitState(stageSeed);
-        stageSeedState = Random.state;
         barCounter = waveBarPause - stageBarStart;
     }
 
@@ -34,10 +41,18 @@ public class WaveSpawner : MonoBehaviour
         if (barCounter >= waveBarPause)
         {
             barCounter = 0;
-            // to ensure that no other random calls interfere with level generation, recall and save the random seed it with each usage
-            Random.state = stageSeedState;
-            Instantiate(spawners[Random.Range(0, spawners.Length)]);
-            stageSeedState = Random.state;
+            if (waveCountSpawned < waveCount)
+            {
+                // to ensure that no other random calls interfere with level generation, recall and save the random seed it with each usage
+                Random.InitState(stageSeed + waveCountSpawned);
+                Instantiate(spawners[Random.Range(0, spawners.Length)]);
+                UIManager.instance.waveMarker.UpdateWave(waveCountSpawned + 1);
+            }
+            else if (waveCountSpawned == waveCount)
+            {
+                GameManager.instance.StageComplete();
+            }
+            waveCountSpawned++;
         }
     }
 

@@ -23,7 +23,21 @@ public class UIWaveMarker : MonoBehaviour
 
     public void UpdateWave(int wave)
     {
-        waveNumber.text = wave.ToString();
+        if (wave == -2)
+        {
+            waveTitle.text = "STAGE";
+            waveNumber.text = "FAILED";
+        }
+        else if (wave == -1)
+        {
+            waveTitle.text = "STAGE";
+            waveNumber.text = "COMPLETE";
+        }
+        else
+        {
+            waveTitle.text = "WAVE";
+            waveNumber.text = wave.ToString();
+        }
         opacity = 1f;
     }
 
