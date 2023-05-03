@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 157031717646912055}
   - component: {fileID: 157031717646912054}
   - component: {fileID: 157031717646912052}
-  - component: {fileID: 1284409164779648887}
   - component: {fileID: 1284409164779648904}
   - component: {fileID: 2568316614503461287}
   - component: {fileID: 6648171180279996040}
+  - component: {fileID: 6743210395079671767}
   m_Layer: 13
   m_Name: EnemyPawn3
   m_TagString: Untagged
@@ -111,22 +111,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &1284409164779648887
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157031717646912048}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &1284409164779648904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 157031717646912054}
-  colliderPhysics: {fileID: 1284409164779648887}
+  colliderPhysics: {fileID: 6743210395079671767}
   healthMax: 1
   scoreKill: 10
 --- !u!114 &2568316614503461287
@@ -173,6 +157,34 @@ MonoBehaviour:
   magazine: {fileID: 245251826999776733}
   shotColor: {r: 1, g: 0, b: 0, a: 1}
   shotLayer: 11
+--- !u!60 &6743210395079671767
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157031717646912048}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.00071591325, y: 0.48321387}
+      - {x: -0.48053688, y: -0.35482112}
+      - {x: 0.49107012, y: -0.35553694}
 --- !u!1001 &5586884137518772399
 PrefabInstance:
   m_ObjectHideFlags: 0

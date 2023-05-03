@@ -10,7 +10,7 @@ public class StageManager : MonoBehaviour
     private bool playerAlive = true;
     private bool stageEnd = false;
     private int stageEndBars = 0;
-    private bool menuOpen;
+    public bool menuOpen { get; private set; }
 
     void Awake()
     {

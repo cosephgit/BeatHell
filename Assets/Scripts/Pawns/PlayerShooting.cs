@@ -64,7 +64,8 @@ public class PlayerShooting : BaseShooting
     // Update is called once per frame
     void Update()
     {
-        if (!absorbBullet)
+        // make sure we're not in the menu and not in bullet absorb mode
+        if (!StageManager.instance.menuOpen && !absorbBullet)
         {
             if ((absorbBeatFracsDone == 0) && Input.GetButton("Fire2"))
             {

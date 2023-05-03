@@ -26,12 +26,7 @@ public class PlayerCollisions : BaseCollisions
 
         if (!absorbActive)
         {
-            health -= bullet.damage;
-
-            UIManager.instance.UpdateHealth((float)health / (float)healthMax);
-
-            //Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
-            if (health <= 0) Death();
+            TakeDamage(bullet.damage);
         }
     }
 
@@ -57,6 +52,29 @@ public class PlayerCollisions : BaseCollisions
         }
         else if (barCount > 0)
             barCount = 0;
+    }
+
+    // only the player accounts for collisions with other pawns, as the player can only collide with enemies
+    protected override void OnTriggerEnter2D(Collider2D other)
+    {
+        base.OnTriggerEnter2D(other);
+        if (alive)
+        {
+            BaseCollisions otherCollision = other.GetComponent<BaseCollisions>();
+            if (otherCollision)
+            {
+                // this is another pawn
+                int damage = Mathf.Min(otherCollision.health, health);
+                otherCollision.TakeDamage(damage);
+                TakeDamage(damage);
+            }
+        }
+    }
+
+    public override void TakeDamage(int amount)
+    {
+        base.TakeDamage(amount);
+        UIManager.instance.UpdateHealth((float)health / (float)healthMax);
     }
 
     // this is called by PlayerShooting when the player changes their bullet absorb state

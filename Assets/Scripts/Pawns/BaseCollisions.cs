@@ -12,7 +12,7 @@ public class BaseCollisions : MonoBehaviour
     [SerializeField]private Collider2D colliderPhysics;
     [SerializeField]protected int healthMax = 1;
     [SerializeField]private int scoreKill = 10;
-    protected int health;
+    public int health { get; protected set; }
     protected bool alive;
 
     private void Awake()
@@ -21,7 +21,7 @@ public class BaseCollisions : MonoBehaviour
         alive = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (alive)
         {
@@ -35,9 +35,17 @@ public class BaseCollisions : MonoBehaviour
 
     protected virtual void BulletHit(Bullet bullet)
     {
-        health -= bullet.damage;
-        //Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
-        if (health <= 0) Death();
+        TakeDamage(bullet.damage);
+    }
+
+    public virtual void TakeDamage(int amount)
+    {
+        if (alive)
+        {
+            health -= amount;
+            //Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
+            if (health <= 0) Death();
+        }
     }
 
     protected virtual void Death()
