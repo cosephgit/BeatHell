@@ -13,9 +13,12 @@ public enum Layer
 
 public static class Global
 {
-    public const float BULLETSCALE = 0.3f;
-    public const float BULLETSCALEPERDAM = 0.1f;
+    public const float BULLETSCALE = 0.2f;
+    public const float BULLETSCALEPERDAM = 0.05f;
     private const string LAYERENEMYBULLET = "EnemyBullet";
+    // save keys - must be unique
+    public const string SAVEVOLUME = "Volume";
+    public const string SAVEEPILEPSY = "Epilepsy";
 
     public static LayerMask LayerEnemyBullet()
     {

@@ -41,6 +41,9 @@ TagManager:
   - name: PulseBG
     uniqueID: 3082504561
     locked: 0
+  - name: PlayerFX
+    uniqueID: 3808005699
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

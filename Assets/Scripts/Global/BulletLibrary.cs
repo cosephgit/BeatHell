@@ -57,6 +57,7 @@ public class BulletLibrary : MonoBehaviour
         {
             bullets.Add(bulletAdd);
         }
+        bulletAdd.Clear();
         bulletAdd.transform.parent = transform; // make sure it doesn't get destroyed with something else
         bulletAdd.gameObject.SetActive(false);
     }

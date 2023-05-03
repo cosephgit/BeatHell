@@ -53,7 +53,8 @@ public class PlayerMagazine : BaseMagazine
                 Quaternion bulletRotation = Quaternion.Euler(0, 0, angle);
                 Bullet bulletFired = BulletLibrary.instance.GetBullet();
 
-                bulletFired.Shoot(transform.position, bulletRotation, shots[i], shotExplosionColor, shotExplosionLayer);
+                bulletFired.Shoot(transform.position, bulletRotation, shots[i], shotExplosionColor, shotExplosionLayer, true);
+                //Debug.Log("<color=orange>WTF</color> bullet spawned at " + transform.position + " on frame " + Time.frameCount);
 
                 shots.RemoveAt(i);
                 angle += angleStep;

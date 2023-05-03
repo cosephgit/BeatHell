@@ -18,7 +18,7 @@ public class BaseShooting : MonoBehaviour
     protected bool shooting = false;
     protected float shotFacing = 0; // the angle which the shots should be cented around
 
-    void Awake()
+    protected virtual void Awake()
     {
         // set up the firing angles for the desired number of shots
         if (shotDetails.shotCount > 0)
@@ -60,7 +60,7 @@ public class BaseShooting : MonoBehaviour
 
                 if (shot)
                 {
-                    bulletFired.Shoot(transform.position, bulletRotation, shot, shotColor, shotLayer);
+                    bulletFired.Shoot(transform.position, bulletRotation, shot, shotColor, shotLayer, IsPlayer());
                     ShotFired();
                 }
             }
@@ -100,5 +100,10 @@ public class BaseShooting : MonoBehaviour
                 beatFracsSinceShot = 0;
             }
         }
+    }
+
+    protected virtual bool IsPlayer()
+    {
+        return false;
     }
 }

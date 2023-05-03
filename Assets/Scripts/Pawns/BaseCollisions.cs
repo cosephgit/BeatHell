@@ -44,7 +44,7 @@ public class BaseCollisions : MonoBehaviour
     {
         EffectTimed pop = Instantiate(PrefabProvider.instance.particlePop, transform.position, PrefabProvider.instance.particlePop.transform.rotation);
         pop.Trigger(sprite.color, transform.localScale);
-        GameManager.instance.AddScore(scoreKill);
+        StageManager.instance.AddScore(scoreKill);
         Destroy(gameObject);
     }
 }

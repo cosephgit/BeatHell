@@ -166,7 +166,7 @@ public class WaveSpawner : MonoBehaviour
         // at each bar, add the intensity of the current bar to the intensity accumulator
         if (barCurrent == barIntensity.Length)
         {
-            GameManager.instance.StageComplete();
+            StageManager.instance.StageComplete();
         }
         else if (barCurrent < barIntensity.Length) // check we're on a valid bar
         {
@@ -202,7 +202,7 @@ public class WaveSpawner : MonoBehaviour
                 if (waveSpawned)
                 {
                     waveSpawned.StartWave(enemyIndex, waveSpawnCount);
-                    Debug.Log("wave spawn triggered with enemy index " + enemyIndex + " and count " + waveSpawnCount + " out of intensity " + intensityAccumulator);
+                    Debug.Log("wave spawn triggered with enemy index " + enemyIndex + " and count " + waveSpawnCount);
 
                     // subtract the strength of the spawned wave from the intensity accumulated
                     intensityAccumulator -= (PrefabProvider.instance.enemyStrength[enemyIndex] * waveSpawnCount);

@@ -9,6 +9,9 @@ public class UIBar : MonoBehaviour
 {
     [SerializeField]private Slider slider;
     [SerializeField]private float sliderChangeRate = 1f;
+    [SerializeField]private Color colorDown = Color.red;
+    [SerializeField]private Color colorUp = Color.cyan;
+    [SerializeField]private Image colorFlash;
     private float target;
 
     void Awake()

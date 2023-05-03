@@ -39,7 +39,7 @@ public class PlayerCollisions : BaseCollisions
     {
         EffectTimed pop = Instantiate(PrefabProvider.instance.particlePop, transform.position, PrefabProvider.instance.particlePop.transform.rotation);
         pop.Trigger(sprite.color, transform.localScale);
-        GameManager.instance.PlayerDeath();
+        StageManager.instance.PlayerDeath();
         Destroy(gameObject);
     }
 

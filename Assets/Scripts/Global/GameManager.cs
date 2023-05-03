@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+
+// DontDestroyOnLoad singleton
+// all overarching features should be handled through this class e.g. save/load and settings
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private int score;
-    private bool playerAlive = true;
-    private bool stageEnd = false;
-    private int stageEndBars = 0;
+    [SerializeField]private AudioMixer audioMixer;
+    public float volume { get; private set; }
+    public bool epilepsy { get; private set; }
 
-    void Awake()
+    private void Awake()
     {
         if (instance)
         {
@@ -22,66 +24,43 @@ public class GameManager : MonoBehaviour
             }
         }
         else
+        {
             instance = this;
-
-        score = 0;
-        playerAlive = true;
-        stageEndBars = 0;
-        stageEnd = false;
-        BeatManager.onBar += BarEnd;
-    }
-
-    public void AddScore(int bonus)
-    {
-        score += bonus;
-        UIManager.instance.scoreBox.UpdateScore(score);
-    }
-
-    // called when player dies
-    public void PlayerDeath()
-    {
-        if (playerAlive && !stageEnd)
-        {
-            UIManager.instance.waveMarker.UpdateWave(-2); // flag for stage failed
-            playerAlive = false;
-            StartCoroutine(PlayerDeathRoutine());
+            DontDestroyOnLoad(gameObject);
         }
+
+        volume = PlayerPrefs.GetFloat(Global.SAVEVOLUME, 1f);
+        audioMixer.SetFloat("_volume", VolToDecibels(volume));
+        epilepsy = (PlayerPrefs.GetInt(Global.SAVEEPILEPSY, 0) == 1);
     }
 
-    // called when player dies
-    public void StageComplete()
+    // updates the volume both in the save settings and in the audio mixer
+    public void SetVolume(float vol)
     {
-        if (playerAlive && !stageEnd)
-        {
-            UIManager.instance.waveMarker.UpdateWave(-1); // flag for stage complete
-            stageEnd = true;
-            StartCoroutine(PlayerWinRoutine());
-        }
+        volume = vol;
+        PlayerPrefs.SetFloat(Global.SAVEVOLUME, vol);
+        audioMixer.SetFloat("_volume", VolToDecibels(volume));
     }
 
-    private IEnumerator PlayerDeathRoutine()
+    public void SetEpilepsy(bool isOn)
     {
-        while (stageEndBars < 2)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        SceneManager.LoadScene(0); // back to main menu for now
+        epilepsy = isOn;
+        PlayerPrefs.SetInt(Global.SAVEEPILEPSY, isOn ? 1 : 0);
     }
 
-    private IEnumerator PlayerWinRoutine()
+    public static float VolToDecibels(float vol)
     {
-        while (stageEndBars < 2)
+        float decibels;
+        if (vol < 0.01f)
         {
-            yield return new WaitForEndOfFrame();
+            // can't do log 0
+            decibels = -80f;
         }
-        SceneManager.LoadScene(0); // back to main menu for now
-    }
-
-    public void BarEnd()
-    {
-        if (!playerAlive || stageEnd)
+        else
         {
-            stageEndBars++;
+            decibels = Mathf.Log(vol, 2f); // so each halving of volume is -1
+            decibels *= 10f; // -10 decibels is approximately half volume
         }
+        return decibels;
     }
 }

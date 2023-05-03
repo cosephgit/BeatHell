@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 
 // manages the background pulse which is strengthened by music managers, and fades gradually over time
+// kind of UI (just a visual, and may affect UI text) kind of not (not on a canvas object)
 
 public class BackgroundPulse : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class BackgroundPulse : MonoBehaviour
         Color bgColor = bgColorBase;
 
         bgColor.a = bgStrength * bgStrengthScale;
+
+        if (GameManager.instance.epilepsy) bgColor.a *= 0.3f; // reduced flash brightness in epilepsy-safe mode
 
         backgroundSprite.color = bgColor;
 

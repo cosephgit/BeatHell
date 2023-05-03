@@ -41,8 +41,6 @@ public class BeatManager : MonoBehaviour
         {
             instance = this;
 
-            DontDestroyOnLoad(gameObject);
-
             StartCoroutine(LateFixedUpdate());
 
             #if UNITY_EDITOR

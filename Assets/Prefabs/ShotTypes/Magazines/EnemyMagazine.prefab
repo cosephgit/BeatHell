@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5561022578191394870}
-  - component: {fileID: 1438914610327223361}
+  - component: {fileID: 5688000946576319858}
   m_Layer: 0
-  m_Name: PlayerMagazine
+  m_Name: EnemyMagazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1438914610327223361
+--- !u!114 &5688000946576319858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,8 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 189618474657913271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 773f79d3c97dcd940aa7a3ebb282efd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 978bf9b44b0897d49bc989b4d83963ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultShotPrefab: {fileID: 3467358887021038663, guid: c57efb56ced630047b136418c6fe1862, type: 3}
-  shotsStart: 20
+  defaultShotPrefab: {fileID: 3467358887021038663, guid: 7161cc86b8892524f9279a1d083368ac, type: 3}
