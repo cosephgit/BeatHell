@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // shows the contents of the player's magazine
 
@@ -11,11 +12,17 @@ public class UIMagazine : MonoBehaviour
     [SerializeField]private GameObject shotFillLeft; // an empty GameObject to position the left edge of the remaining shots
     [SerializeField]private GameObject shotFillRight; // an empty GameObject to position the right edge of the remaining shots
     [SerializeField]private float shotSpacingFakeMin = 10f; // the fake minimum number of shots for spacing calculations
+    [Header("Shot explosion alert")]
+    [SerializeField]private Image shotExplosionWarningFlash;
+    [SerializeField]private Color shotExplosionWarningColor = Color.red;
+    [SerializeField]private float shotExplosionWarningDecay = 2f; // how quickly the warning flash decays
     private List<UIShot> shotDisplay; // stores all the shots currently being displayed
+    private float magAlert = 0f;
 
     private void Awake()
     {
         shotDisplay = new List<UIShot>();
+        shotExplosionWarningFlash.color = Color.clear;
     }
 
     private void UpdateShotPositions()
@@ -30,6 +37,15 @@ public class UIMagazine : MonoBehaviour
                 pos += (posInc * (i - 1));
                 shotDisplay[i].transform.position = pos;
             }
+        }
+    }
+
+    void Update()
+    {
+        if (magAlert > 0)
+        {
+            magAlert = Mathf.Max(0, magAlert - Time.deltaTime * shotExplosionWarningDecay);
+            shotExplosionWarningFlash.color = Color.Lerp(Color.clear, shotExplosionWarningColor, magAlert);
         }
     }
 
@@ -63,5 +79,10 @@ public class UIMagazine : MonoBehaviour
             shotDisplay.RemoveAt(0);
             UpdateShotPositions();
         }
+    }
+
+    public void MagazineAlert()
+    {
+        magAlert = 1f;
     }
 }

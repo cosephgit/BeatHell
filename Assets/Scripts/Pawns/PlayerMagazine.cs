@@ -7,10 +7,17 @@ using UnityEngine;
 public class PlayerMagazine : BaseMagazine
 {
     [SerializeField]private int shotsStart = 20;
-    [SerializeField]private int shotCapacity = 50;
+    [SerializeField]private int shotWarning = 30; // how many shots before the player gets a warning indicator
+    [SerializeField]private int shotCapacity = 50; // how many shots before the magazine explodes
     [SerializeField]private Color shotExplosionColor = Color.yellow;
     [SerializeField]private Layer shotExplosionLayer = Layer.PlayerBullet;
+    [Header("Shot explosion alert")]
+    [SerializeField]private AudioSource shotExposionWarningSound;
+    [SerializeField]private AudioClip shotExplosionSound;
+    [SerializeField]private int shotExposionWarningBeatFracs = 4; // number of beat fracs between warning flashes
     private List<Shot> shots;
+    private int shotExplosionCount;
+
 
     void Awake()
     {
@@ -20,11 +27,13 @@ public class PlayerMagazine : BaseMagazine
         {
             shots.Add(defaultShotPrefab);
         }
+        shotExplosionCount = 0;
     }
 
     void Start()
     {
         UIManager.instance.magazine.SetShots(shots.Count);
+        BeatManager.onBeatFrac += WarningFlashBeatFrac;
     }
 
     public override Shot GetShot()
@@ -59,7 +68,30 @@ public class PlayerMagazine : BaseMagazine
                 shots.RemoveAt(i);
                 angle += angleStep;
             }
+
+            UIManager.instance.magazine.MagazineAlert();
+            shotExposionWarningSound.PlayOneShot(shotExplosionSound);
         }
         UIManager.instance.magazine.SetShots(shots.Count);
+    }
+
+    void OnDestroy()
+    {
+        BeatManager.onBeatFrac -= WarningFlashBeatFrac;
+    }
+
+    private void WarningFlashBeatFrac(int count)
+    {
+        if (shots.Count > shotWarning)
+        {
+            shotExplosionCount++;
+            if (shotExplosionCount == shotExposionWarningBeatFracs)
+            {
+                shotExplosionCount = 0;
+                shotExposionWarningSound.Play();
+                UIManager.instance.magazine.MagazineAlert();
+            }
+        }
+        else shotExplosionCount = 0;
     }
 }

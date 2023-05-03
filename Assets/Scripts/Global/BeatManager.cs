@@ -57,6 +57,7 @@ public class BeatManager : MonoBehaviour
     // we want to make ABSOLUTELY SURE that the count always happens at the same point in the frame, in this case it will always happen after everything else
     private IEnumerator LateFixedUpdate()
     {
+        yield return new WaitForSeconds(0.5f); // take a little time before starting the beat
         while (true)
         {
             yield return new WaitForFixedUpdate();

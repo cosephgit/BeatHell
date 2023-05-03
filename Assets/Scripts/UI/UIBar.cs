@@ -12,12 +12,15 @@ public class UIBar : MonoBehaviour
     [SerializeField]private Color colorDown = Color.red;
     [SerializeField]private Color colorUp = Color.cyan;
     [SerializeField]private Image colorFlash;
+    [SerializeField]private float colorFlashDecay = 2f; // how quickly the color flash fades away
     private float target;
+    private float colorFlashAmount;
 
     void Awake()
     {
         target = 0;
         slider.value = 0;
+        colorFlashAmount = 0f;
     }
 
     void Update()
@@ -30,10 +33,31 @@ public class UIBar : MonoBehaviour
         {
             slider.value = Mathf.Max(slider.value - (Time.deltaTime * sliderChangeRate), target);
         }
+
+        if (colorFlashAmount < 0)
+        {
+            colorFlashAmount = Mathf.Min(0, colorFlashAmount + Time.deltaTime * colorFlashDecay);
+            colorFlash.color = Color.Lerp(Color.clear, colorDown, -colorFlashAmount);
+        }
+        else if (colorFlashAmount > 0)
+        {
+            colorFlashAmount = Mathf.Max(0, colorFlashAmount - Time.deltaTime * colorFlashDecay);
+            colorFlash.color = Color.Lerp(Color.clear, colorUp, colorFlashAmount);
+        }
     }
 
     public void SetTarget(float targetNew)
     {
         target = Mathf.Clamp(targetNew, 0f, 1f);
+        if (Mathf.Approximately(target, slider.value))
+        { }
+        else if (target < slider.value)
+        {
+            colorFlashAmount = -1f;
+        }
+        else if (target > slider.value)
+        {
+            colorFlashAmount = 1f;
+        }
     }    
 }
