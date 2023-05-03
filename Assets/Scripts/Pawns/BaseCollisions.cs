@@ -36,7 +36,7 @@ public class BaseCollisions : MonoBehaviour
     protected virtual void BulletHit(Bullet bullet)
     {
         health -= bullet.damage;
-        Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
+        //Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
         if (health <= 0) Death();
     }
 

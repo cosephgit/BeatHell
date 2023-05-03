@@ -9,6 +9,7 @@ public class PrefabProvider : MonoBehaviour
     public static PrefabProvider instance;
     [field: SerializeField]public EffectTimed particlePop { get; private set; }
     [field: SerializeField]public GameObject[] enemyPrefab { get; private set; }
+    [field: SerializeField]public float[] enemyStrength { get; private set; }
 
     void Awake()
     {

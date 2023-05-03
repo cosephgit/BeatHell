@@ -30,7 +30,7 @@ public class PlayerCollisions : BaseCollisions
 
             UIManager.instance.UpdateHealth((float)health / (float)healthMax);
 
-            Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
+            //Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
             if (health <= 0) Death();
         }
     }

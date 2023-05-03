@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: PulseBG
+    uniqueID: 3082504561
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PlayerBullet
+    uniqueID: 3344557219
+    locked: 0
+  - name: EnemyBullet
+    uniqueID: 2915291889
     locked: 0

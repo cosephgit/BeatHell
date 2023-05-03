@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2139706602650924020}
+  pulseStrength: 0.4
   instruments:
   - {fileID: 0}
   - {fileID: 8300000, guid: 1e475fb3bf9f4bd4a92cb8c86d4cb84b, type: 3}

@@ -12,6 +12,7 @@ public class MusicManager : MonoBehaviour
     // these are the instrument sounds to be played
     [Header("Music settings")]
     [SerializeField]private AudioSource player; // the sound player for this music player
+    [SerializeField]private float pulseStrength = 1f;
     [Tooltip("Index 0 should be null")]
     [SerializeField]private AudioClip[] instruments; // an array of instruments which this music player has
     [Tooltip("Index 0 is always no instrument")]
@@ -42,6 +43,7 @@ public class MusicManager : MonoBehaviour
         {
             if (sheetMusic[beatFracCount] > 0)
             {
+                BackgroundPulse.instance.AddBeat(pulseStrength);
                 player.PlayOneShot(instruments[sheetMusic[beatFracCount]]);
             }
             beatFracCount++;

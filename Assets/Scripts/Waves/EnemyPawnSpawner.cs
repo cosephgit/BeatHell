@@ -21,6 +21,12 @@ public class EnemyPawnSpawner : MusicManager
     protected override void Start()
     {
         base.Start();
+    }
+
+    public void StartWave(int enemyIndex, int spawnCount)
+    {
+        enemySpawnMax = spawnCount;
+        spawnStrength = enemyIndex;
         playing = false; // only start playing when this spawner goes active
     }
 

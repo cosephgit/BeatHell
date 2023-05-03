@@ -26,8 +26,8 @@ public class LinearStrategy : BaseStrategy
     }
     public override float RotateOrigin(int step)
     {
-        Debug.Log("RotateOrigin " + moveRotate[step] + "/" + moveBeatFracs[step] + "/" + BeatManager.beatFracFrames);
-        Debug.Log("RotateOrigin result " + ((moveRotate[step] / (float)moveBeatFracs[step]) / (float)BeatManager.beatFracFrames));
+        //Debug.Log("RotateOrigin " + moveRotate[step] + "/" + moveBeatFracs[step] + "/" + BeatManager.beatFracFrames);
+        //Debug.Log("RotateOrigin result " + ((moveRotate[step] / (float)moveBeatFracs[step]) / (float)BeatManager.beatFracFrames));
         return ((moveRotate[step] / (float)moveBeatFracs[step]) / (float)BeatManager.beatFracFrames);
     }
     public override Vector2 Move(int step)
