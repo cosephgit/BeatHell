@@ -35,6 +35,7 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         MenuClose();
+        UIManager.instance.stageBox.UpdateWave(GameManager.instance.stage + 1);
     }
 
     public void AddScore(int bonus)
@@ -48,8 +49,10 @@ public class StageManager : MonoBehaviour
     {
         if (playerAlive && !stageEnd)
         {
-            UIManager.instance.waveMarker.UpdateWave(-2); // flag for stage failed
+            UIManager.instance.stageBox.UpdateWave(-2); // flag for stage failed
             playerAlive = false;
+            MenuClose();
+            GameManager.instance.ResetStage();
             StartCoroutine(PlayerDeathRoutine());
         }
     }
@@ -59,8 +62,10 @@ public class StageManager : MonoBehaviour
     {
         if (playerAlive && !stageEnd)
         {
-            UIManager.instance.waveMarker.UpdateWave(-1); // flag for stage complete
+            UIManager.instance.stageBox.UpdateWave(-1); // flag for stage complete
             stageEnd = true;
+            MenuClose();
+            GameManager.instance.ProgressStage();
             StartCoroutine(PlayerWinRoutine());
         }
     }
@@ -121,7 +126,7 @@ public class StageManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        SceneManager.LoadScene(0); // back to main menu for now
+        SceneManager.LoadScene(1); // reload scene, with new scene stored in GameManager
     }
 
     public void BarEnd()

@@ -9,7 +9,6 @@ public class WaveSpawner : MonoBehaviour
 {
     // TEMP just for concept testing, an array of ready-made spawners
     [SerializeField]private EnemyPawnSpawner[] spawners;
-    [SerializeField]private int waveCount = 4; // number of waves in the stage
     [SerializeField]private int waveBarPause = 4; // number of bars that play between each wave
     [SerializeField]private int stageBarStart = 1; // number of bars before the first spawn
     [SerializeField]private int stageBarTarget = 48; // the approximate target number of bars to play for this stage
@@ -35,13 +34,15 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]private int waveMax = 12;
     private int barCounter = 0;
     private int waveCountSpawned = 0;
-
     private int barCurrent = 0;
     private float intensityAccumulator = 0f;
+    private float difficulty;
 
     // creates a stage intensity graph
     private void IntensityGenerator()
     {
+        difficulty = Global.DIFFBASE + (Global.DIFFMULT * (float)GameManager.instance.stage);
+
         // new stage intensity graph calculation
         Vector2[] intensitySteps; // each intensity step has two values: the intensity (float 0...1) and the bar (int 0...)
 
@@ -138,7 +139,7 @@ public class WaveSpawner : MonoBehaviour
             //intensityDeficitWork[i] *= BASELINE / intensityDeficit;
             intensityDeficitWork[i] = Mathf.Pow(intensityDeficitWork[i], (intensityDeficit / BASELINE));
             //Debug.Log("adjusted deficit " + i + " is " + intensityDeficitWork[i] + " old adjusted deficit: " + fook);
-            barIntensity[i] = Mathf.Pow((1f - intensityDeficitWork[i]), 1f / intensityHighBias);
+            barIntensity[i] = Mathf.Pow((1f - intensityDeficitWork[i]), 1f / intensityHighBias) * difficulty;
             if (barIntensity[i] < 0f) Debug.LogError("ALERT barIntensity[" + i + "] < 0f: " + barIntensity[i]);
             //else Debug.Log("barIntensity[" + i + "]: " + barIntensity[i]);
         }
@@ -153,12 +154,12 @@ public class WaveSpawner : MonoBehaviour
     private void Awake()
     {
         barCounter = waveBarPause - stageBarStart;
-        IntensityGenerator();
     }
 
     private void Start()
     {
         BeatManager.onBar += StageBar;
+        IntensityGenerator();
     }
 
     private void StageBar()

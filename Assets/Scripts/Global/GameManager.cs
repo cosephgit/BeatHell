@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]private AudioMixer audioMixer;
     public float volume { get; private set; }
     public bool epilepsy { get; private set; }
+    public int stage { get; private set; }
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         volume = PlayerPrefs.GetFloat(Global.SAVEVOLUME, 1f);
         audioMixer.SetFloat("_volume", VolToDecibels(volume));
         epilepsy = (PlayerPrefs.GetInt(Global.SAVEEPILEPSY, 0) == 1);
+        stage = PlayerPrefs.GetInt(Global.SAVEWAVE, 0);
     }
 
     // updates the volume both in the save settings and in the audio mixer
@@ -62,5 +64,16 @@ public class GameManager : MonoBehaviour
             decibels *= 10f; // -10 decibels is approximately half volume
         }
         return decibels;
+    }
+
+    public void ProgressStage()
+    {
+        stage++;
+        PlayerPrefs.SetInt(Global.SAVEWAVE, stage);
+    }
+    public void ResetStage()
+    {
+        stage = 0;
+        PlayerPrefs.SetInt(Global.SAVEWAVE, stage);
     }
 }

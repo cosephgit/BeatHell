@@ -5,6 +5,7 @@ using TMPro;
 
 // shows the wave indicator
 // fades to transparency again after it is updated
+// also used as stage indicator
 
 public class UIWaveMarker : MonoBehaviour
 {
@@ -25,17 +26,14 @@ public class UIWaveMarker : MonoBehaviour
     {
         if (wave == -2)
         {
-            waveTitle.text = "STAGE";
             waveNumber.text = "FAILED";
         }
         else if (wave == -1)
         {
-            waveTitle.text = "STAGE";
             waveNumber.text = "COMPLETE";
         }
         else
         {
-            waveTitle.text = "WAVE";
             waveNumber.text = wave.ToString();
         }
         opacity = 1f;

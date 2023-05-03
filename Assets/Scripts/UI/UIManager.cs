@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [field: SerializeField]public UIWaveMarker waveMarker { get; private set; }
     [field: SerializeField]public UIScoreBox scoreBox { get; private set; }
     [field: SerializeField]public UIInGameMenu inGameMenu { get; private set; }
+    [field: SerializeField]public UIWaveMarker stageBox { get; private set; }
 
     private void Awake()
     {
