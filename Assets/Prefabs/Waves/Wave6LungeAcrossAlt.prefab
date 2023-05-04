@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4311254011970558005
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2139706602650924022, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2588191
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.9659258
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924023, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: rotationMax
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924023, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: spawnStrategy
+      value: 
+      objectReference: {fileID: 4491854067578839700, guid: 911d398ed8902fb43ad193a745e2b3c5, type: 3}
+    - target: {fileID: 2139706602650924025, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+      propertyPath: m_Name
+      value: Wave6LungeAcrossAlt
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}

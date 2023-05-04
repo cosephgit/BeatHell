@@ -10,7 +10,7 @@ public class BaseMovement : MonoBehaviour
     [SerializeField]private float speed = 1f;
     [SerializeField]private Rigidbody2D body;
     protected Vector2 move = Vector2.zero; // a unit vector indicating the direction of movement
-    private float speedTick;
+    protected float speedTick;
 
     protected virtual void Awake()
     {

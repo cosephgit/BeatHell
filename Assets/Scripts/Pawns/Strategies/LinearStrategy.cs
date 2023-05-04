@@ -32,7 +32,8 @@ public class LinearStrategy : BaseStrategy
     }
     public override Vector2 Move(int step)
     {
-        return moveMags[step];
+        // this needs to be scaled so the move magnitude is completed over MoveBeatFracs
+        return ((moveMags[step] / (float)moveBeatFracs[step] / (float)BeatManager.beatFracFrames));
     }
     public override int StepBeatFracs(int step)
     {

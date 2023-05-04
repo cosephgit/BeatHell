@@ -41,7 +41,10 @@ public class EnemyMovement : BaseMovement
         else
             move = Vector2.zero;
 
-        base.FixedUpdate();
+        if (move.magnitude > 0)
+        {
+            transform.Translate(move);
+        }
     }
 
     private void OnDestroy()

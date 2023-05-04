@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5194535091972598133
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.2588191
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.9659258
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924023, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: rotationMax
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2139706602650924023, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: spawnStrategy
+      value: 
+      objectReference: {fileID: 4173064349079930607, guid: 235361b6f8207844cae2687d5baf8de3, type: 3}
+    - target: {fileID: 2139706602650924025, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
+      propertyPath: m_Name
+      value: Wave4WiggleLoopAlt
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}

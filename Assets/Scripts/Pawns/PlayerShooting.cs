@@ -102,7 +102,7 @@ public class PlayerShooting : BaseShooting
             }
             else
             {
-                absorbArea.color = Color.Lerp(absorbStart, absorbEnd, (0.5f + (float)absorbBeatFracsDone / (float)absorbBeatFracs));
+                absorbArea.color = Color.Lerp(absorbStart, absorbEnd, ((float)absorbBeatFracsDone / (float)absorbBeatFracs) - 0.5f);
             }
             absorbBeatFracsDone++;
         }

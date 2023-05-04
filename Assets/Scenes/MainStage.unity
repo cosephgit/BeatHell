@@ -2247,6 +2247,12 @@ MonoBehaviour:
   spawners:
   - {fileID: 2139706602650924023, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
   - {fileID: 4175187704111847646, guid: af6ac47120e831c4d938c0b5f959705c, type: 3}
+  - {fileID: 4175187704111847646, guid: 2be5a91fb51b5bf498b2305437873ee8, type: 3}
+  - {fileID: 6172027113374423682, guid: a8446f88598a71c419c25366a6ecf8c5, type: 3}
+  - {fileID: 2139706602650924023, guid: 286f7a5a9490ce442a91d561454b4213, type: 3}
+  - {fileID: 2766729142382324674, guid: ac61f92dc074a234fb753db088158c47, type: 3}
+  - {fileID: 2139706602650924023, guid: e358c295c91b5d44a9b0986853b4780b, type: 3}
+  - {fileID: 3270890234192687188, guid: d23ca0e64a19730408fa6555a427070f, type: 3}
   waveBarPause: 4
   stageBarStart: 1
   stageBarTarget: 60
@@ -2272,7 +2278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1023991409
 RectTransform:
   m_ObjectHideFlags: 0

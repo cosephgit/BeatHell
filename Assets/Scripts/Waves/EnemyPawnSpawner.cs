@@ -11,12 +11,13 @@ public class EnemyPawnSpawner : MusicManager
     [SerializeField]private int enemySpawnDestroyBar = 4; // how many bars before this spawner self-destructs
     [SerializeField]private int enemyBeatFracDelay = 4; // how many beat fractions between spawns
     [SerializeField]private int enemySpawnMax = 4;
-    [SerializeField]private float rotationIncrement = 0f; // the degrees of rotation after each spawn
+    [SerializeField]private float rotationMax = 90f; // the degrees of rotation maximum
     [SerializeField]private BaseStrategy spawnStrategy; // the prefab strategy that the spawns should start with
     [SerializeField]private int spawnStrength;
     private int beatFracCountSpawn = 0; // independent counter for spawning enemies
     private int enemySpawns = 0;
     private int barCount = 0;
+    private float rotationStep; // the step
 
     protected override void Start()
     {
@@ -27,6 +28,7 @@ public class EnemyPawnSpawner : MusicManager
     {
         enemySpawnMax = spawnCount;
         spawnStrength = enemyIndex;
+        rotationStep = rotationMax / (float)(spawnCount - 1);
         playing = false; // only start playing when this spawner goes active
     }
 
@@ -48,7 +50,7 @@ public class EnemyPawnSpawner : MusicManager
                 enemySpawns++;
                 if (enemySpawns < enemySpawnMax)
                 {
-                    transform.Rotate(0, 0, rotationIncrement);
+                    transform.Rotate(0, 0, rotationStep);
                     beatFracCountSpawn = 0;
                 }
             }

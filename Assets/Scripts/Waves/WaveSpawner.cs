@@ -19,6 +19,7 @@ public class WaveSpawner : MonoBehaviour
     // this is much simpler - target wave size of 8 with a weak enemy at 1st stage max intensity (with a bit of buffer so it's still possible with imperfect timing)
     private const float WAVESTRENGTHBASE = 6f;
     private float[] barIntensity;
+    private int wavePrevious = -1; // the index of the last wave spawned (only relevant for the first spawn)
 
     /*
     How random numbers work in this script.
@@ -124,14 +125,7 @@ public class WaveSpawner : MonoBehaviour
             intensityDeficitWork[i] = 1f - Mathf.Pow(barIntensity, intensityHighBias);
             intensityDeficit += intensityDeficitWork[i];
         }
-        if (intensityDeficit > BASELINE)
-        {
-            //Debug.Log("total intensity deficit " + intensityDeficit + " is ABOVE BASELINE");
-        }
-        else if (intensityDeficit < BASELINE)
-        {
-            //Debug.Log("total intensity deficit " + intensityDeficit + " is BELOW BASELINE");
-        }
+
         barIntensity = new float[barLast];
         for (int i = 0; i < barLast; i++)
         {
@@ -202,6 +196,18 @@ public class WaveSpawner : MonoBehaviour
                 float waveStrength = WAVESTRENGTHBASE * barIntensity[barCurrent];
                 int waveSpawnCount = Mathf.Clamp(Mathf.FloorToInt(waveStrength / PrefabProvider.instance.enemyStrength[enemyIndex]), waveMin, waveMax);
 
+                // avoid running the same wave twice in a row
+                int waveSelect;
+                if (wavePrevious == -1)
+                {
+                    waveSelect = Random.Range(0, spawners.Length);
+                }
+                else
+                {
+                    waveSelect = Random.Range(0, spawners.Length - 1);
+                    if (waveSelect == wavePrevious) waveSelect++;
+                }
+                wavePrevious = waveSelect;
                 // place the spawner and update the UI
                 EnemyPawnSpawner waveSpawned = Instantiate(spawners[Random.Range(0, spawners.Length)]);
 
