@@ -23,16 +23,17 @@ public class PlayerMagazine : BaseMagazine
     {
         // populate the shot list with some generic shots to start
         shots = new List<Shot>();
-        for (int i = 0; i < shotsStart; i++)
-        {
-            shots.Add(defaultShotPrefab);
-        }
         shotExplosionCount = 0;
     }
 
     void Start()
     {
-        UIManager.instance.magazine.SetShots(shots.Count);
+        for (int i = 0; i < shotsStart; i++)
+        {
+            shots.Add(defaultShotPrefab);
+            UIManager.instance.magazine.AddShot(defaultShotPrefab);
+        }
+        //UIManager.instance.magazine.SetShots(shots.Count);
         BeatManager.onBeatFrac += WarningFlashBeatFrac;
     }
 
@@ -52,6 +53,8 @@ public class PlayerMagazine : BaseMagazine
     public override void AddShot(Shot shotAdd)
     {
         shots.Add(shotAdd);
+        UIManager.instance.magazine.AddShot(shotAdd);
+
         if (shots.Count >= shotCapacity)
         {
             float angle = transform.eulerAngles.z;
@@ -66,13 +69,14 @@ public class PlayerMagazine : BaseMagazine
                 //Debug.Log("<color=orange>WTF</color> bullet spawned at " + transform.position + " on frame " + Time.frameCount);
 
                 shots.RemoveAt(i);
+
                 angle += angleStep;
             }
 
-            UIManager.instance.magazine.MagazineAlert();
+            UIManager.instance.magazine.ClearShots();
             shotExposionWarningSound.PlayOneShot(shotExplosionSound);
         }
-        UIManager.instance.magazine.SetShots(shots.Count);
+        //UIManager.instance.magazine.SetShots(shots.Count);
     }
 
     void OnDestroy()

@@ -49,7 +49,7 @@ public class UIMagazine : MonoBehaviour
         }
     }
 
-    public void SetShots(int count)
+    public void SetShots(int count, bool bork)
     {
         if (shotDisplay.Count > count)
         {
@@ -68,6 +68,22 @@ public class UIMagazine : MonoBehaviour
             }
         }
         UpdateShotPositions();
+    }
+
+    public void ClearShots()
+    {
+        for (int i = shotDisplay.Count - 1; i >= 0; i--)
+        {
+            Destroy(shotDisplay[i].gameObject);
+            shotDisplay.RemoveAt(i);
+        }
+    }
+
+    public void AddShot(Shot shotType)
+    {
+        UIShot shotNew = Instantiate(shotPrefab, transform.position, shotPrefab.transform.rotation, transform);
+        shotNew.SetShot(shotType);
+        shotDisplay.Add(shotNew);
     }
 
     // removes the first entry in the que, called when the player shoots

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3083860760056452078
+--- !u!1 &4250278804412097830
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4193099942333573351}
-  - component: {fileID: 3467358887021038663}
+  - component: {fileID: 7637216411583808927}
+  - component: {fileID: 8967041440092921819}
   m_Layer: 0
-  m_Name: Shot1
+  m_Name: EnemyShootPattern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4193099942333573351
+--- !u!4 &7637216411583808927
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3083860760056452078}
+  m_GameObject: {fileID: 4250278804412097830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,18 +32,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3467358887021038663
+--- !u!114 &8967041440092921819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3083860760056452078}
+  m_GameObject: {fileID: 4250278804412097830}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d744047d119849644abc00da3eee4875, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b60f8bb08b5c274798ffe2f7efd8135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <shotDamage>k__BackingField: 1
-  <shotSpeed>k__BackingField: 8
-  <shotLife>k__BackingField: 3
+  <beatFracsOffset>k__BackingField: 1
+  <beatFracsPerShot>k__BackingField: 2
+  <shotCount>k__BackingField: 1
+  <cone>k__BackingField: 0
+  <magazine>k__BackingField: {fileID: 0}

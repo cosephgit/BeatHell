@@ -41,7 +41,7 @@ public class WaveSpawner : MonoBehaviour
     // creates a stage intensity graph
     private void IntensityGenerator()
     {
-        difficulty = Global.DIFFBASE + (Global.DIFFMULT * (float)GameManager.instance.stage);
+        difficulty = Global.DIFFBASE + (Global.DIFFMULT * (float)GameManager.instance.stage[GameManager.instance.slotActive]);
 
         // new stage intensity graph calculation
         Vector2[] intensitySteps; // each intensity step has two values: the intensity (float 0...1) and the bar (int 0...)

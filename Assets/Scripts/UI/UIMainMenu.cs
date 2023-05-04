@@ -9,14 +9,17 @@ using UnityEngine.UI;
 public class UIMainMenu : MonoBehaviour
 {
     [SerializeField]private GameObject screenMain;
+    [SerializeField]private GameObject screenPlay;
     [SerializeField]private GameObject screenOptions;
     [SerializeField]private GameObject screenInstructions;
     [SerializeField]private GameObject screenQuit;
     [SerializeField]private Slider sliderVolume;
     [SerializeField]private Toggle toggleEpilepsy;
+    private bool mainMenu;
 
     void Awake()
     {
+        mainMenu = (screenPlay != null);
         ButtonReturn();
     }
 
@@ -26,13 +29,24 @@ public class UIMainMenu : MonoBehaviour
         toggleEpilepsy.isOn = GameManager.instance.epilepsy;
     }
 
-    public void ButtonPlay()
+    public void ButtonPlay(System.Int32 slot)
     {
+        GameManager.instance.SetActiveSlot(slot);
         SceneManager.LoadScene(1);
+    }
+
+    public void ButtonPlaySelect()
+    {
+        if (mainMenu) screenPlay.SetActive(true);
+        screenMain.SetActive(false);
+        screenOptions.SetActive(false);
+        screenInstructions.SetActive(false);
+        screenQuit.SetActive(false);
     }
 
     public void ButtonOptions()
     {
+        if (mainMenu) screenPlay.SetActive(false);
         screenMain.SetActive(false);
         screenOptions.SetActive(true);
         screenInstructions.SetActive(false);
@@ -41,6 +55,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void ButtonInstructions()
     {
+        if (mainMenu) screenPlay.SetActive(false);
         screenMain.SetActive(false);
         screenOptions.SetActive(false);
         screenInstructions.SetActive(true);
@@ -49,6 +64,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void ButtonReturn()
     {
+        if (mainMenu) screenPlay.SetActive(false);
         screenMain.SetActive(true);
         screenOptions.SetActive(false);
         screenInstructions.SetActive(false);
@@ -57,6 +73,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void ButtonQuitMenu()
     {
+        if (mainMenu) screenPlay.SetActive(false);
         screenMain.SetActive(false);
         screenOptions.SetActive(false);
         screenInstructions.SetActive(false);

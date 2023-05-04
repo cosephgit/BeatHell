@@ -35,7 +35,7 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         MenuClose();
-        UIManager.instance.stageBox.UpdateWave(GameManager.instance.stage + 1);
+        UIManager.instance.stageBox.UpdateWave(GameManager.instance.stage[GameManager.instance.slotActive] + 1);
     }
 
     public void AddScore(int bonus)

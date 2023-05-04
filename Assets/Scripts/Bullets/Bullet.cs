@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
 
     public void Shoot(Vector3 pos, Quaternion rot, Shot shot, Color shotColor, Layer shotLayer, bool player)
     {
-        float scale = Global.BULLETSCALE + (shot.shotDamage * Global.BULLETSCALEPERDAM);
+        float scale = shot.ShotScale();
         transform.parent = null;
         transform.localScale = new Vector3(scale, scale, scale);
         transform.position = pos;
