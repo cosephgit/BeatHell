@@ -10,10 +10,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField]private AudioMixer audioMixer;
+    [SerializeField]private int[] difficultyBPM = new int[3] { 125, 150, 190 };
     public float volume { get; private set; }
     public bool epilepsy { get; private set; }
     public int[] stage { get; private set; } = new int[Global.SAVESLOTS];
     public int[] difficulty { get; private set; } = new int[Global.SAVESLOTS];
+    public int[] score { get; private set; } = new int[Global.SAVESLOTS];
     public int slotActive { get; private set; } = 0;
 
     private void Awake()
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         {
             stage[i] = PlayerPrefs.GetInt(SlotKeySyntax(Global.SAVESTAGE, i), 0);
             difficulty[i] = PlayerPrefs.GetInt(SlotKeySyntax(Global.SAVEDIFFICULTY, i), 0);
+            score[i] = PlayerPrefs.GetInt(SlotKeySyntax(Global.SAVESCORE, i), 0);
         }
     }
 
@@ -79,10 +82,12 @@ public class GameManager : MonoBehaviour
         return decibels;
     }
 
-    public void ProgressStage()
+    public void ProgressStage(int scoreGain)
     {
         stage[slotActive]++;
         PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVESTAGE, slotActive), stage[slotActive]);
+        score[slotActive] += scoreGain;
+        PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVESCORE, slotActive), score[slotActive]);
     }
     public void ResetStage(int slot = -1)
     {
@@ -93,6 +98,25 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVESTAGE, slotClear), 0);
         difficulty[slotClear] = 0;
         PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVEDIFFICULTY, slotClear), 0);
+        score[slotClear] = 0;
+        PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVESCORE, slotClear), 0);
+    }
+
+    // gets the currently active stage
+    public int GetStage()
+    {
+        return stage[slotActive];
+    }
+
+    // gets the currently active stage
+    public int GetDiff()
+    {
+        return difficulty[slotActive];
+    }
+
+    public int GetBPM()
+    {
+        return difficultyBPM[difficulty[slotActive]];
     }
 
     public void SetActiveSlot(int slot)

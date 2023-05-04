@@ -15,11 +15,12 @@ public class UISaveSlot : MonoBehaviour
     // load game only features
     [SerializeField]private TextMeshProUGUI slotStage; // show the difficuly of an active slot
     [SerializeField]private TextMeshProUGUI slotDifficulty; // show the difficuly of an active slot
+    [SerializeField]private TextMeshProUGUI slotScore; // show the difficuly of an active slot
     [SerializeField]private GameObject slotLoadDelete; // contains the slot features for deleting a saved game (confirm button)
     // slot type
     [SerializeField]private int slotIndex; // the numerical index for this save slot MUST BE LESS THAN Global.SAVESLOTS!!!
     [SerializeField]private float slotDeleteDuration = 3f; // duration of the slot delete confirmation box
-    private string[] diffName = new string[3] { "Chillstep (125BPM)", "Dubstep (150BPM)", "Nightcore (190BPM)" }; // kinda hacky duplication of difficulty name data
+    private string[] diffName = new string[3] { "Casual (125BPM)", "Intense (150BPM)", "Nightmare (190BPM)" }; // kinda hacky duplication of difficulty name data
 
     private void Awake()
     {
@@ -48,6 +49,7 @@ public class UISaveSlot : MonoBehaviour
             slotLoadDelete.SetActive(false);
             slotText.text = "Load slot " + (slotIndex + 1);
             slotStage.text = "Stage " + (GameManager.instance.stage[slotIndex] + 1);
+            slotScore.text = "Score " + GameManager.instance.score[slotIndex];
             slotDifficulty.text = diffName[GameManager.instance.difficulty[slotIndex]];
         }
         else

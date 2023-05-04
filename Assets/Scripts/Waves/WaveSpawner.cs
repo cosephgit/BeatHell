@@ -180,18 +180,23 @@ public class WaveSpawner : MonoBehaviour
                 Random.InitState(stageSeed + barCurrent);
                 // once the minimum number of bars between waves has passed, try to spawn a wave
                 int enemyIndex = 0;
-                int enemyIndexMax = -1;
+                int enemyIndexMin = 0;
+                int enemyIndexMax = 0;
                 for (int i = 0; i < PrefabProvider.instance.enemyStrength.Length; i++)
                 {
                     // get the strongest enemy index that can be spawned at the current intensity
-                    if (PrefabProvider.instance.enemyStrength[i] < barIntensity[barCurrent])
+                    if (PrefabProvider.instance.enemyStrength[i] < barIntensity[barCurrent] * Global.DIFFSPAWNSCALEMAX)
                     {
                         enemyIndexMax = i;
                     }
+                    if (PrefabProvider.instance.enemyStrength[i] < barIntensity[barCurrent] * Global.DIFFSPAWNSCALEMIN)
+                    {
+                        enemyIndexMin = i + 1;
+                    }
                 }
+                if (enemyIndexMin < enemyIndexMax) enemyIndexMin = enemyIndexMax;
                 // if multiple possible enemies are possible at the current intensity, randomise amongst them
-                if (enemyIndexMax >= 0)
-                    enemyIndex = Random.Range(0, enemyIndexMax + 1);
+                enemyIndex = Random.Range(enemyIndexMin, enemyIndexMax + 1);
 
                 // calculate the total wave strength for the current bar, and work out how many of the chosen enemies to spawn
                 float waveStrength = WAVESTRENGTHBASE * barIntensity[barCurrent];

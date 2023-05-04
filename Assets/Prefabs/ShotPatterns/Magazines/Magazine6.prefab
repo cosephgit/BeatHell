@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5561022578191394870}
   - component: {fileID: 5688000946576319858}
   m_Layer: 0
-  m_Name: EnemyMagazine
+  m_Name: Magazine6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978bf9b44b0897d49bc989b4d83963ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultShotPrefab: {fileID: 3467358887021038663, guid: 7161cc86b8892524f9279a1d083368ac, type: 3}
+  defaultShotPrefab: {fileID: 3467358887021038663, guid: 73a05a2e5629dce4eb1c1c2dea6d5997, type: 3}

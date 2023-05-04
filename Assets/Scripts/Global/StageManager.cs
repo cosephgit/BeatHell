@@ -35,12 +35,13 @@ public class StageManager : MonoBehaviour
     void Start()
     {
         MenuClose();
+        UIManager.instance.waveMarker.SetStage(GameManager.instance.stage[GameManager.instance.slotActive]);
         UIManager.instance.stageBox.UpdateWave(GameManager.instance.stage[GameManager.instance.slotActive] + 1);
     }
 
     public void AddScore(int bonus)
     {
-        score += bonus;
+        score += Mathf.CeilToInt(bonus * (Global.SCOREBASE + (GameManager.instance.GetDiff() * Global.SCOREDIFF)));
         UIManager.instance.scoreBox.UpdateScore(score);
     }
 
@@ -65,7 +66,6 @@ public class StageManager : MonoBehaviour
             UIManager.instance.stageBox.UpdateWave(-1); // flag for stage complete
             stageEnd = true;
             MenuClose();
-            GameManager.instance.ProgressStage();
             StartCoroutine(PlayerWinRoutine());
         }
     }
@@ -117,7 +117,9 @@ public class StageManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        SceneManager.LoadScene(0); // back to main menu for now
+        Time.timeScale = 0;
+        UIManager.instance.stageEnd.gameObject.SetActive(true);
+        UIManager.instance.stageEnd.SetStageEnd(false, GameManager.instance.GetStage(), 0);
     }
 
     private IEnumerator PlayerWinRoutine()
@@ -126,7 +128,9 @@ public class StageManager : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        SceneManager.LoadScene(1); // reload scene, with new scene stored in GameManager
+        Time.timeScale = 0;
+        UIManager.instance.stageEnd.gameObject.SetActive(true);
+        UIManager.instance.stageEnd.SetStageEnd(true, GameManager.instance.GetStage(), score);
     }
 
     public void BarEnd()

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3083860760056452078
+--- !u!1 &189618474657913271
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4193099942333573351}
-  - component: {fileID: 3467358887021038663}
+  - component: {fileID: 5561022578191394870}
+  - component: {fileID: 5688000946576319858}
   m_Layer: 0
-  m_Name: Shot4
+  m_Name: Magazine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4193099942333573351
+--- !u!4 &5561022578191394870
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3083860760056452078}
+  m_GameObject: {fileID: 189618474657913271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,19 +32,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3467358887021038663
+--- !u!114 &5688000946576319858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3083860760056452078}
+  m_GameObject: {fileID: 189618474657913271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d744047d119849644abc00da3eee4875, type: 3}
+  m_Script: {fileID: 11500000, guid: 978bf9b44b0897d49bc989b4d83963ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <shotDamage>k__BackingField: 2
-  <shotSpeed>k__BackingField: 7.5
-  <shotLife>k__BackingField: 3
-  <shotSprite>k__BackingField: {fileID: 21300000, guid: 90377c5614ff714438fd4342a0f9fb58, type: 3}
+  defaultShotPrefab: {fileID: 3467358887021038663, guid: 7161cc86b8892524f9279a1d083368ac, type: 3}

@@ -14,6 +14,7 @@ public class UIWaveMarker : MonoBehaviour
     [SerializeField]private float transFadeRate = 0.5f;
     [SerializeField]private Color colorBase = Color.white;
     private float opacity;
+    private string stage = "";
 
     void Awake()
     {
@@ -22,8 +23,15 @@ public class UIWaveMarker : MonoBehaviour
         waveNumber.color = Color.clear;
     }
 
+    public void SetStage(int stageNew)
+    {
+        stage = (stageNew + 1) + " - ";
+    }
+
+    // updates the stage/wave indicator with the new stage/wave number
     public void UpdateWave(int wave)
     {
+        // -2 and -1 are flags for stage states
         if (wave == -2)
         {
             waveNumber.text = "FAILED";
@@ -34,7 +42,10 @@ public class UIWaveMarker : MonoBehaviour
         }
         else
         {
-            waveNumber.text = wave.ToString();
+            if (stage == "") // then this is a stage marker
+                waveNumber.text = wave.ToString();
+            else // then this is a wave marker
+                waveNumber.text = stage + wave.ToString();
         }
         opacity = 1f;
     }

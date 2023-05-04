@@ -84,6 +84,7 @@ public class UIMagazine : MonoBehaviour
         UIShot shotNew = Instantiate(shotPrefab, transform.position, shotPrefab.transform.rotation, transform);
         shotNew.SetShot(shotType);
         shotDisplay.Add(shotNew);
+        UpdateShotPositions();
     }
 
     // removes the first entry in the que, called when the player shoots

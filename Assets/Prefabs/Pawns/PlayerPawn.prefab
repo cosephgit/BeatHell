@@ -275,7 +275,7 @@ MonoBehaviour:
   healthMax: 10
   scoreKill: 10
   magazine: {fileID: 7356879910471378545}
-  healthRegenBarDelay: 2
+  healthRegenBarDelay: 4
 --- !u!114 &1440800962450836025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,8 +288,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66718b53c55c99f4e99a1c765b44cc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  speed: 8
   body: {fileID: 1440800962450836028}
+  moveBounds:
+    serializedVersion: 2
+    x: -10
+    y: -5
+    width: 20
+    height: 10
 --- !u!114 &516847494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,16 +313,16 @@ MonoBehaviour:
   shotColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   shotLayer: 10
   shootSound: {fileID: 798355791}
-  playerCollisions: {fileID: 0}
+  playerCollisions: {fileID: 9129509525900828398}
   absorbArea: {fileID: 6323858315014340955}
   absorbReady: {fileID: 7908390710180875100}
   absorbStart: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   absorbEnd: {r: 1, g: 1, b: 0, a: 0}
   absorbSound: {fileID: 1978862987849316544}
-  absorbBeatFracs: 4
-  absorbBeatFracsRecover: 12
-  absorbRadius: 2
-  absorbPower: 4
+  absorbBeatFracs: 12
+  absorbBeatFracsRecover: 24
+  absorbRadius: 4
+  absorbPower: 16
 --- !u!1 &4097721769890624847
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,6 +598,10 @@ PrefabInstance:
     - target: {fileID: 189618474657913271, guid: 0e0c66615ca424f4d860970ae346bd0e, type: 3}
       propertyPath: m_Name
       value: PlayerMagazine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438914610327223361, guid: 0e0c66615ca424f4d860970ae346bd0e, type: 3}
+      propertyPath: shotExposionWarningBeatFracs
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5561022578191394870, guid: 0e0c66615ca424f4d860970ae346bd0e, type: 3}
       propertyPath: m_RootOrder

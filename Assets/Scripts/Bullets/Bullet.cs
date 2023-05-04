@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
         transform.position = pos;
         transform.rotation = rot;
         sprite.color = shotColor;
+        sprite.sprite = shot.shotSprite;
         vee = Vector2.up * shot.shotSpeed * Time.fixedDeltaTime;
         if (player) vee = vee * 1.5f;
         damage = shot.shotDamage;

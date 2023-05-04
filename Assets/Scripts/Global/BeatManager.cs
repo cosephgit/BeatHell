@@ -18,7 +18,7 @@ public class BeatManager : MonoBehaviour
     public static event Beat onBeat;
     public delegate void Bar();
     public static event Bar onBar;
-    [SerializeField]private int startBPM = 90;
+    [SerializeField]private int startBPM = -1; // if set, this is the bpm that the scene will use (used for the main menu)
     [SerializeField]private int beatsPerBar = 4; // number of beats per bar
     [SerializeField]private int beatFracPerBeat = 2; // number of fractions that each beat is split into
     public static int beatFracFrames { get; private set; } = 10; // the number of fixed update frames per fraction of a beat
@@ -48,10 +48,20 @@ public class BeatManager : MonoBehaviour
             //onBeat += BeatHappens;
             //onBar += BarHappens;
             #endif
-
-            BPMToBeatFrames(startBPM);
-            Debug.Log("actual bpm is " + bpm);
         }
+    }
+
+    void Start()
+    {
+        if (startBPM > 0)
+        {
+            BPMToBeatFrames(startBPM);
+        }
+        else
+        {
+            BPMToBeatFrames(GameManager.instance.GetBPM());
+        }
+        Debug.Log("actual bpm is " + bpm);
     }
 
     // we want to make ABSOLUTELY SURE that the count always happens at the same point in the frame, in this case it will always happen after everything else
