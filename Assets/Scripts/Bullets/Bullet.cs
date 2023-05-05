@@ -48,13 +48,21 @@ public class Bullet : MonoBehaviour
             life -= Time.fixedDeltaTime;
             if (life < 0)
             {
-                BulletLibrary.instance.ReturnBullet(this);
+                Death();
             }
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Death();
+    }
+
+    private void Death()
+    {
+        EffectTimed particles = Instantiate(PrefabProvider.instance.particlePop, transform.position, transform.rotation);
+        particles.Trigger(sprite.color, transform.localScale);
+
         BulletLibrary.instance.ReturnBullet(this);
     }
 }

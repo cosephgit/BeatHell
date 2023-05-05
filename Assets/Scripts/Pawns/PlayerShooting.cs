@@ -39,6 +39,8 @@ public class PlayerShooting : BaseShooting
     protected override void ShotFired()
     {
         shootSound.Play();
+        if (magazine.Empty() && GameManager.instance.stage[GameManager.instance.slotActive] == 0)
+            UIMousePointer.instance.ShowHintAbsorb();
     }
 
     void FixedUpdate()

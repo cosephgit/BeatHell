@@ -13,12 +13,18 @@ public enum Layer
 
 public static class Global
 {
+    // bullet values
     public const float BULLETSCALE = 0.3f;
     public const float BULLETSCALEPERDAM = 0.1f;
     private const string LAYERENEMYBULLET = "EnemyBullet";
+    // difficulty settings
     public const float DIFFBASE = 1f;
     public const float DIFFMULT = 0.5f;
     public const float PLAYERBULLETSPEED = 2f;
+    public const int PLAYERBULLETSTART = 20;
+    public const int PLAYERBULLETWARNING = 30;
+    public const int PLAYERBULLETEXPLODE = 50;
+    // score settings
     public const float SCOREBASE = 1f;
     public const float SCOREDIFF = 1f; // score bonus per difficulty tier
     public const float DIFFSPAWNSCALEMIN = 0.5f; // the smallest enemy strength spawned as a multiple of current bar intensity

@@ -5,39 +5,42 @@ using UnityEngine;
 // this wave spawner spawns the individual waves in a stage
 // it uses random generation to spawn the waves, but from a ready-made fixed seed
 
+/*
+How random numbers work in this script.
+Each stage has a stageSeed
+Before spawning each wave, the random seed is set with stageSeed + waveCountSpawned
+The reason for this is to allow Random.Range calls outside of this script to be made (for cosmetic reasons) but for THIS script to have level generation
+that ALWAYS has the same (randomly determined) result for any given stageSeedBase.
+
+An alternative approach for this is to pregenerate all the wave indices at the start of the stage during Start
+*/
+
 public class WaveSpawner : MonoBehaviour
 {
-    // TEMP just for concept testing, an array of ready-made spawners
     [SerializeField]private EnemyPawnSpawner[] spawners;
+    [Header("Timing")]
     [SerializeField]private int waveBarPause = 4; // number of bars that play between each wave
     [SerializeField]private int stageBarStart = 1; // number of bars before the first spawn
     [SerializeField]private int stageBarTarget = 48; // the approximate target number of bars to play for this stage
+    [Header("Spawning")]
     [SerializeField]private float intensityHighBias = 1.5f;
+    [SerializeField]private int waveMin = 4;
+    [SerializeField]private int waveMax = 12;
+    [Header("Manual seed setting")]
+    [SerializeField]private int stageSeed = 0; // the original random seed to be used for this stage
     // to comment this effectively I would need to attach an annotated spreadsheet, so don't mess with it
     // short story is it is the ideal adjusted intensity deficit in a stage, and since you don't understand what that means: don't mess with it
-    private const float BASELINE = 29.94f;
+    // basically, if you MUST mess with it: bigger = less spawns, smaller = more spawns
+    private const float BASELINE = 40f; //29.94f;
     // this is much simpler - target wave size of 8 with a weak enemy at 1st stage max intensity (with a bit of buffer so it's still possible with imperfect timing)
-    private const float WAVESTRENGTHBASE = 6f;
-    private float[] barIntensity;
+    private const float WAVESTRENGTHBASE = 4f;
+    private float[] barIntensity; // a set of intensity values calculated for each bar in IntensityGenerator
     private int wavePrevious = -1; // the index of the last wave spawned (only relevant for the first spawn)
-
-    /*
-    How random numbers work in this script.
-    Each stage has a stageSeed
-    Before spawning each wave, the random seed is set with stageSeed + waveCountSpawned
-    The reason for this is to allow Random.Range calls outside of this script to be made (for cosmetic reasons) but for THIS script to have level generation
-    that ALWAYS has the same (randomly determined) result for any given stageSeedBase.
-
-    An alternative approach for this is to pregenerate all the wave indices at the start of the stage during Start
-    */
-    [SerializeField]private int stageSeed = 0; // the original random seed to be used for this stage
-    [SerializeField]private int waveMin = 6;
-    [SerializeField]private int waveMax = 12;
-    private int barCounter = 0;
-    private int waveCountSpawned = 0;
-    private int barCurrent = 0;
-    private float intensityAccumulator = 0f;
-    private float difficulty;
+    private int barCounter = 0; // the count of bars in the current spawn cycle
+    private int waveCountSpawned = 0; // the number of waves spawned so far
+    private int barCurrent = 0; // the number of bars since the stage began
+    private float intensityAccumulator = 0f; // adds up the intensity for each bar passed
+    private float difficulty; // the stage difficuly
 
     // creates a stage intensity graph
     private void IntensityGenerator()
@@ -115,10 +118,7 @@ public class WaveSpawner : MonoBehaviour
             {
                 float lerp = barsExtra / (intensitySteps[intensityStepCurrent + 1].y - intensitySteps[intensityStepCurrent].y);
                 barIntensity = Mathf.Lerp(intensitySteps[intensityStepCurrent].x, intensitySteps[intensityStepCurrent + 1].x, lerp);
-                //Debug.Log("lerping: " + lerp);
             }
-            // need to lerp between the start value of this step and the start value of the next step
-            //Debug.Log("intensityStepCurrent = " + intensityStepCurrent + " barIntensity = " + barIntensity);
 
             // this calculation takes the magnitude of the REDUCED intensity (the amount less than 0) and applies a power to it
             // the point of this is that it values low intensity even lower - it's very easy to manage a constant low intensity compared to spikes of high intensity
@@ -129,20 +129,18 @@ public class WaveSpawner : MonoBehaviour
         barIntensity = new float[barLast];
         for (int i = 0; i < barLast; i++)
         {
-            float fook = intensityDeficitWork[i] * BASELINE / intensityDeficit;
+            #if UNITY_EDITOR
+            float fook = intensityDeficitWork[i];
+            #endif
             //intensityDeficitWork[i] *= BASELINE / intensityDeficit;
             intensityDeficitWork[i] = Mathf.Pow(intensityDeficitWork[i], (intensityDeficit / BASELINE));
-            //Debug.Log("adjusted deficit " + i + " is " + intensityDeficitWork[i] + " old adjusted deficit: " + fook);
             barIntensity[i] = Mathf.Pow((1f - intensityDeficitWork[i]), 1f / intensityHighBias) * difficulty;
+            #if UNITY_EDITOR
+            //Debug.Log("adjusted deficit " + i + " is " + intensityDeficitWork[i] + " from deficit: " + fook);
             if (barIntensity[i] < 0f) Debug.LogError("ALERT barIntensity[" + i + "] < 0f: " + barIntensity[i]);
             //else Debug.Log("barIntensity[" + i + "]: " + barIntensity[i]);
+            #endif
         }
-        /*for (int i = 0; i < intensityDeficitWork.Length; i++)
-        {
-            intensityDeficitWork[i] *= BASELINE / intensityDeficit;
-            if (intensityDeficitWork[i] >= 1f) Debug.LogError("ALERT intensityDeficitWork[" + i + "] >= 1f: " + intensityDeficitWork[i]);
-            intensitySteps[i].x = (1f - intensityDeficitWork[i]);
-        }*/
     }
 
     private void Awake()
@@ -201,6 +199,8 @@ public class WaveSpawner : MonoBehaviour
                 if (wavePrevious == -1)
                 {
                     waveSelect = Random.Range(0, spawners.Length);
+                    if (GameManager.instance.stage[GameManager.instance.slotActive] == 0)
+                        UIMousePointer.instance.ShowHintShoot();
                 }
                 else
                 {
@@ -214,7 +214,9 @@ public class WaveSpawner : MonoBehaviour
                 if (waveSpawned)
                 {
                     waveSpawned.StartWave(enemyIndex, waveSpawnCount, Random.Range(0f,0.999f));
+                    #if UNITY_EDITOR
                     Debug.Log("wave spawn triggered with enemy index " + enemyIndex + " and count " + waveSpawnCount);
+                    #endif
 
                     // subtract the strength of the spawned wave from the intensity accumulated
                     intensityAccumulator -= (PrefabProvider.instance.enemyStrength[enemyIndex] * waveSpawnCount);

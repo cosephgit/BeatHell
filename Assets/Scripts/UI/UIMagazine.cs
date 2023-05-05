@@ -14,15 +14,26 @@ public class UIMagazine : MonoBehaviour
     [SerializeField]private float shotSpacingFakeMin = 10f; // the fake minimum number of shots for spacing calculations
     [Header("Shot explosion alert")]
     [SerializeField]private Image shotExplosionWarningFlash;
+    [SerializeField]private AudioSource shotExplosionWarningSound;
     [SerializeField]private Color shotExplosionWarningColor = Color.red;
-    [SerializeField]private float shotExplosionWarningDecay = 2f; // how quickly the warning flash decays
+    [SerializeField]private int shotExplosionWarningBeats = 2; // beats between warning flash toggles
+    [SerializeField]private GameObject hintAbsorb;
     private List<UIShot> shotDisplay; // stores all the shots currently being displayed
     private float magAlert = 0f;
+    private int shotExplosionCount = 0;
+    private bool shotExplosionDisplayed = false;
+    private bool shotEmptyDisplayed = false;
 
     private void Awake()
     {
         shotDisplay = new List<UIShot>();
         shotExplosionWarningFlash.color = Color.clear;
+        hintAbsorb.SetActive(false);
+    }
+
+    private void Start()
+    {
+        BeatManager.onBeatFrac += WarningFlashBeatFrac;
     }
 
     private void UpdateShotPositions()
@@ -37,15 +48,6 @@ public class UIMagazine : MonoBehaviour
                 pos += (posInc * (i - 1));
                 shotDisplay[i].transform.position = pos;
             }
-        }
-    }
-
-    void Update()
-    {
-        if (magAlert > 0)
-        {
-            magAlert = Mathf.Max(0, magAlert - Time.deltaTime * shotExplosionWarningDecay);
-            shotExplosionWarningFlash.color = Color.Lerp(Color.clear, shotExplosionWarningColor, magAlert);
         }
     }
 
@@ -98,8 +100,42 @@ public class UIMagazine : MonoBehaviour
         }
     }
 
-    public void MagazineAlert()
+    void OnDestroy()
     {
-        magAlert = 1f;
+        BeatManager.onBeatFrac -= WarningFlashBeatFrac;
+    }
+
+    private void WarningFlashBeatFrac(int count)
+    {
+        if ((shotDisplay.Count == 0) || (shotDisplay.Count > Global.PLAYERBULLETWARNING) || shotExplosionDisplayed || shotEmptyDisplayed)
+        {
+            shotExplosionCount++;
+            if (shotExplosionCount == shotExplosionWarningBeats)
+            {
+                shotExplosionCount = 0;
+                if (shotExplosionDisplayed)
+                {
+                    shotExplosionDisplayed = false;
+                    shotExplosionWarningFlash.color = Color.clear;
+                }
+                else if (shotDisplay.Count > Global.PLAYERBULLETWARNING)
+                {
+                    shotExplosionDisplayed = true;
+                    shotExplosionWarningSound.Play();
+                    shotExplosionWarningFlash.color = shotExplosionWarningColor;
+                }
+                if (shotEmptyDisplayed)
+                {
+                    hintAbsorb.SetActive(false);
+                    shotEmptyDisplayed = false;
+                }
+                else if (shotDisplay.Count == 0)
+                {
+                    hintAbsorb.SetActive(true);
+                    shotEmptyDisplayed = true;
+                }
+            }
+        }
+        else if (shotExplosionCount > 0) shotExplosionCount = 0;
     }
 }

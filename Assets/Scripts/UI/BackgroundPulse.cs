@@ -10,7 +10,7 @@ public class BackgroundPulse : MonoBehaviour
 {
     public static BackgroundPulse instance;
     [SerializeField]private SpriteRenderer backgroundSprite;
-    [SerializeField]private TextMeshProUGUI optionalText;
+    [SerializeField]private TextMeshProUGUI[] optionalText;
     [SerializeField]private float bgStrengthScale = 0.2f; // background opacity is strength times this
     [SerializeField]private float bgStrengthDecayMin = 2f;
     [SerializeField]private float bgStrengthDecayScale = 10f;
@@ -43,9 +43,10 @@ public class BackgroundPulse : MonoBehaviour
 
         backgroundSprite.color = bgColor;
 
-        if (optionalText)
+        if (optionalText.Length > 0)
         {
-            optionalText.color = Color.Lerp(bgColorText, bgColorTextPulse, bgStrength);
+            for (int i = 0; i < optionalText.Length; i++)
+                optionalText[i].color = Color.Lerp(bgColorText, bgColorTextPulse, bgStrength);
         }
     }
 

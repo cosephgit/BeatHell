@@ -14,6 +14,7 @@ public class EnemyPawnSpawner : MusicManager
     [SerializeField]private float rotationMax = 90f; // the degrees of rotation maximum
     [SerializeField]private BaseStrategy spawnStrategy; // the prefab strategy that the spawns should start with
     [SerializeField]private int spawnStrength;
+    [SerializeField]private bool menuMusicLoop = false; // allows looping the music on the main menu
     private int beatFracCountSpawn = 0; // independent counter for spawning enemies
     private int enemySpawns = 0;
     private int barCount = 0;
@@ -72,6 +73,6 @@ public class EnemyPawnSpawner : MusicManager
         {
             if (barCount >= enemySpawnStartBar) playing = true;
         }
-        if (barCount >= enemySpawnDestroyBar) Destroy(gameObject, 1f); // give enough time for the last beat to finish playing
+        if (barCount >= enemySpawnDestroyBar && !menuMusicLoop) Destroy(gameObject, 1f); // give enough time for the last beat to finish playing
     }
 }

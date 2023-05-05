@@ -10,7 +10,7 @@ public class BaseShooting : MonoBehaviour
     [Header("shotDetails is just a prefab data reference")]
     [SerializeField]private ShotDetails[] shotDetails;
     [Header("magazine must be reference to a real object")]
-    [SerializeField]private BaseMagazine magazine;
+    [SerializeField]protected BaseMagazine magazine;
     [SerializeField]private Color shotColor = Color.yellow;
     [SerializeField]private Layer shotLayer = Layer.EnemyBullet;
     private ShotDetails shotSelected;
@@ -69,12 +69,20 @@ public class BaseShooting : MonoBehaviour
                     bulletFired.Shoot(transform.position, bulletRotation, shot, shotColor, shotLayer, IsPlayer());
                     ShotFired();
                 }
+                else
+                    ShotFailed();
             }
         }
     }
 
     // called when a shot is successfully fired
     protected virtual void ShotFired()
+    {
+
+    }
+
+    // called when a shot fails to fire (no ammo)
+    protected virtual void ShotFailed()
     {
 
     }

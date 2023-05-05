@@ -26,6 +26,8 @@ public class PlayerCollisions : BaseCollisions
 
         if (!absorbActive)
         {
+            if (GameManager.instance.stage[GameManager.instance.slotActive] == 0)
+                UIMousePointer.instance.ShowHintAbsorb();
             TakeDamage(bullet.damage);
         }
     }

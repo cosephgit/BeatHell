@@ -37,6 +37,8 @@ public class StageManager : MonoBehaviour
         MenuClose();
         UIManager.instance.waveMarker.SetStage(GameManager.instance.stage[GameManager.instance.slotActive]);
         UIManager.instance.stageBox.UpdateWave(GameManager.instance.stage[GameManager.instance.slotActive] + 1);
+        if (GameManager.instance.stage[GameManager.instance.slotActive] == 0)
+            UIMousePointer.instance.ShowHintMove();
     }
 
     public void AddScore(int bonus)

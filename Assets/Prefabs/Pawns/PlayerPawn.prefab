@@ -320,9 +320,9 @@ MonoBehaviour:
   absorbStart: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   absorbEnd: {r: 1, g: 1, b: 0, a: 0}
   absorbSound: {fileID: 1978862987849316544}
-  absorbBeatFracs: 12
-  absorbBeatFracsRecover: 24
-  absorbRadius: 4
+  absorbBeatFracs: 8
+  absorbBeatFracsRecover: 16
+  absorbRadius: 6
   absorbPower: 16
 --- !u!1 &4097721769890624847
 GameObject:
@@ -351,7 +351,7 @@ Transform:
   m_GameObject: {fileID: 4097721769890624847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1440800962450836031}
@@ -601,6 +601,10 @@ PrefabInstance:
       value: PlayerMagazine
       objectReference: {fileID: 0}
     - target: {fileID: 1438914610327223361, guid: 0e0c66615ca424f4d860970ae346bd0e, type: 3}
+      propertyPath: shotExplosionSound
+      value: 
+      objectReference: {fileID: 590185855653778985}
+    - target: {fileID: 1438914610327223361, guid: 0e0c66615ca424f4d860970ae346bd0e, type: 3}
       propertyPath: shotExposionWarningBeatFracs
       value: 2
       objectReference: {fileID: 0}
@@ -648,8 +652,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9065795057919118361, guid: 0e0c66615ca424f4d860970ae346bd0e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 22656cbefab4b534a95362da73819cca, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e0c66615ca424f4d860970ae346bd0e, type: 3}
+--- !u!82 &590185855653778985 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9065795057919118361, guid: 0e0c66615ca424f4d860970ae346bd0e, type: 3}
+  m_PrefabInstance: {fileID: 8494051105854380592}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4092741717775659526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5561022578191394870, guid: 0e0c66615ca424f4d860970ae346bd0e, type: 3}

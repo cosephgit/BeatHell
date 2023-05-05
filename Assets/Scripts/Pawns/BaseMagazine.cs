@@ -18,6 +18,11 @@ public class BaseMagazine : MonoBehaviour
         return defaultShotPrefab;
     }
 
+    public virtual bool Empty()
+    {
+        return false;
+    }
+
     public virtual void AddShot(Shot shotAdd)
     {
         // base class doesn't use this

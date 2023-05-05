@@ -63,13 +63,5 @@ PrefabInstance:
       propertyPath: <shotCount>k__BackingField
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 8967041440092921819, guid: 8a7baaf7e6ed2de4dbd7348ee8d3d6be, type: 3}
-      propertyPath: <beatFracsOffset>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967041440092921819, guid: 8a7baaf7e6ed2de4dbd7348ee8d3d6be, type: 3}
-      propertyPath: <beatFracsPerShot>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a7baaf7e6ed2de4dbd7348ee8d3d6be, type: 3}
