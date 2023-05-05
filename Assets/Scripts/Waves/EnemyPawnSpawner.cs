@@ -18,18 +18,20 @@ public class EnemyPawnSpawner : MusicManager
     private int enemySpawns = 0;
     private int barCount = 0;
     private float rotationStep; // the step
+    private float weaponKey;
 
     protected override void Start()
     {
         base.Start();
     }
 
-    public void StartWave(int enemyIndex, int spawnCount)
+    public void StartWave(int enemyIndex, int spawnCount, float weaponKeyValue)
     {
         enemySpawnMax = spawnCount;
         spawnStrength = enemyIndex;
         rotationStep = rotationMax / (float)(spawnCount - 1);
         playing = false; // only start playing when this spawner goes active
+        weaponKey = weaponKeyValue;
     }
 
     protected override void MusicBeatFraction(int count)
@@ -45,6 +47,11 @@ public class EnemyPawnSpawner : MusicManager
                 if (enemySpawnMove)
                 {
                     enemySpawnMove.SetStrategy(spawnStrategy);
+                }
+                EnemyShooting enemySpawnShoot = enemySpawn.GetComponent<EnemyShooting>();
+                if (enemySpawnShoot)
+                {
+                    enemySpawnShoot.SetWeapon(weaponKey);
                 }
 
                 enemySpawns++;

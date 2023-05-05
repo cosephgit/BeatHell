@@ -308,7 +308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfa7d56ec9bcb34bb809dec1eac72dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotDetails: {fileID: 8967041440092921819, guid: f5f2818030c545344b4fa9dab3fe8007, type: 3}
+  shotDetails:
+  - {fileID: 8967041440092921819, guid: f5f2818030c545344b4fa9dab3fe8007, type: 3}
   magazine: {fileID: 7356879910471378545}
   shotColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   shotLayer: 10

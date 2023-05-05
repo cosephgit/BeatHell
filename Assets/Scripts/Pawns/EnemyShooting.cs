@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyShooting : BaseShooting
 {
-    // Update is called once per frame
-    void Update()
+    public void SetWeapon(float weaponKey)
     {
+        InitWeapon(weaponKey);
         shooting = true;
     }
 }

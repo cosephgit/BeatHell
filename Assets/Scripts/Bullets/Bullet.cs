@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         sprite.color = shotColor;
         sprite.sprite = shot.shotSprite;
         vee = Vector2.up * shot.shotSpeed * Time.fixedDeltaTime;
-        if (player) vee = vee * 1.5f;
+        if (player) vee = vee * Global.PLAYERBULLETSPEED;
         damage = shot.shotDamage;
         life = shot.shotLife;
         gameObject.layer = (int)shotLayer;

@@ -4585,9 +4585,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3304409181989058690, guid: 28397f530e2fc2243a1a86fe0b1f5694, type: 3}
-      propertyPath: <enemyPrefab>k__BackingField.Array.data[0]
-      value: 
-      objectReference: {fileID: 157031717646912048, guid: 8d5d825401bdc6a4c9b645576d76101e, type: 3}
+      propertyPath: <enemyStrength>k__BackingField.Array.data[2]
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304409181989058690, guid: 28397f530e2fc2243a1a86fe0b1f5694, type: 3}
+      propertyPath: <enemyStrength>k__BackingField.Array.data[3]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304409181989058690, guid: 28397f530e2fc2243a1a86fe0b1f5694, type: 3}
+      propertyPath: <enemyStrength>k__BackingField.Array.data[4]
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304409181989058690, guid: 28397f530e2fc2243a1a86fe0b1f5694, type: 3}
+      propertyPath: <enemyStrength>k__BackingField.Array.data[5]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304409181989058690, guid: 28397f530e2fc2243a1a86fe0b1f5694, type: 3}
+      propertyPath: <enemyStrength>k__BackingField.Array.data[6]
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304409181989058690, guid: 28397f530e2fc2243a1a86fe0b1f5694, type: 3}
+      propertyPath: <enemyStrength>k__BackingField.Array.data[7]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304409181989058690, guid: 28397f530e2fc2243a1a86fe0b1f5694, type: 3}
+      propertyPath: <enemyStrength>k__BackingField.Array.data[8]
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3304409181989058691, guid: 28397f530e2fc2243a1a86fe0b1f5694, type: 3}
       propertyPath: m_Name
       value: PrefabManager

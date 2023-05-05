@@ -8,11 +8,12 @@ using UnityEngine;
 public class BaseShooting : MonoBehaviour
 {
     [Header("shotDetails is just a prefab data reference")]
-    [SerializeField]private ShotDetails shotDetails;
+    [SerializeField]private ShotDetails[] shotDetails;
     [Header("magazine must be reference to a real object")]
     [SerializeField]private BaseMagazine magazine;
     [SerializeField]private Color shotColor = Color.yellow;
     [SerializeField]private Layer shotLayer = Layer.EnemyBullet;
+    private ShotDetails shotSelected;
     private int beatFracsSinceShot;
     private float[] shotAngles;
     protected bool shooting = false;
@@ -20,15 +21,20 @@ public class BaseShooting : MonoBehaviour
 
     protected virtual void Awake()
     {
+    }
+
+    protected virtual void InitWeapon(float weaponKey)
+    {
+        shotSelected = shotDetails[Mathf.FloorToInt(weaponKey * (float)shotDetails.Length)];
         // set up the firing angles for the desired number of shots
-        if (shotDetails.shotCount > 0)
+        if (shotSelected.shotCount > 0)
         {
-            shotAngles = new float[shotDetails.shotCount];
-            if (shotDetails.shotCount > 1)
+            shotAngles = new float[shotSelected.shotCount];
+            if (shotSelected.shotCount > 1)
             {
-                float minAngle = -shotDetails.cone / 2f;
-                float angleStep = shotDetails.cone / (shotDetails.shotCount - 1);
-                for (int i = 0; i < shotDetails.shotCount; i++)
+                float minAngle = -shotSelected.cone / 2f;
+                float angleStep = shotSelected.cone / (shotSelected.shotCount - 1);
+                for (int i = 0; i < shotSelected.shotCount; i++)
                 {
                     shotAngles[i] = minAngle + (angleStep * i);
                 }
@@ -42,16 +48,16 @@ public class BaseShooting : MonoBehaviour
 
     private void Start()
     {
-        beatFracsSinceShot = shotDetails.beatFracsOffset;
+        beatFracsSinceShot = shotSelected.beatFracsOffset;
         BeatManager.onBeatFrac += BeatFractionShoot;
     }
 
     // the basic shooting function
     protected virtual void Shoot()
     {
-        if (shotDetails.shotCount > 0)
+        if (shotSelected.shotCount > 0)
         {
-            for (int i = 0; i < shotDetails.shotCount; i++)
+            for (int i = 0; i < shotSelected.shotCount; i++)
             {
                 float fireAngle = shotFacing + transform.eulerAngles.z + shotAngles[i];
                 Quaternion bulletRotation = Quaternion.Euler(0, 0, fireAngle);
@@ -95,7 +101,7 @@ public class BaseShooting : MonoBehaviour
             {
                 beatFracsSinceShot++;
             }
-            if (beatFracsSinceShot == shotDetails.beatFracsPerShot)
+            if (beatFracsSinceShot == shotSelected.beatFracsPerShot)
             {
                 beatFracsSinceShot = 0;
             }

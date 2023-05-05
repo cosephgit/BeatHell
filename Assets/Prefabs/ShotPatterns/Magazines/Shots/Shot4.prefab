@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <shotDamage>k__BackingField: 2
-  <shotSpeed>k__BackingField: 7.5
+  <shotSpeed>k__BackingField: 5.5
   <shotLife>k__BackingField: 3
   <shotSprite>k__BackingField: {fileID: 21300000, guid: 90377c5614ff714438fd4342a0f9fb58, type: 3}

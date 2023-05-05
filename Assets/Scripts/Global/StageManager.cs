@@ -53,7 +53,6 @@ public class StageManager : MonoBehaviour
             UIManager.instance.stageBox.UpdateWave(-2); // flag for stage failed
             playerAlive = false;
             MenuClose();
-            GameManager.instance.ResetStage();
             StartCoroutine(PlayerDeathRoutine());
         }
     }

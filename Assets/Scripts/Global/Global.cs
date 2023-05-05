@@ -18,6 +18,7 @@ public static class Global
     private const string LAYERENEMYBULLET = "EnemyBullet";
     public const float DIFFBASE = 1f;
     public const float DIFFMULT = 0.5f;
+    public const float PLAYERBULLETSPEED = 2f;
     public const float SCOREBASE = 1f;
     public const float SCOREDIFF = 1f; // score bonus per difficulty tier
     public const float DIFFSPAWNSCALEMIN = 0.5f; // the smallest enemy strength spawned as a multiple of current bar intensity

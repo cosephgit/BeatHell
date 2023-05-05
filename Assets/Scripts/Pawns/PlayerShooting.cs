@@ -28,6 +28,7 @@ public class PlayerShooting : BaseShooting
         base.Awake();
         absorbReady.enabled = true;
         absorbReady.color = absorbStart;
+        InitWeapon(0);
     }
     protected override void Shoot()
     {

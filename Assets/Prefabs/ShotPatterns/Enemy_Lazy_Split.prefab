@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7637216411583808927}
   - component: {fileID: 8967041440092921819}
   m_Layer: 0
-  m_Name: EnemyShootPattern
+  m_Name: Enemy_Lazy_Split
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <beatFracsOffset>k__BackingField: 1
-  <beatFracsPerShot>k__BackingField: 2
-  <shotCount>k__BackingField: 1
-  <cone>k__BackingField: 0
-  <magazine>k__BackingField: {fileID: 0}
+  <beatFracsPerShot>k__BackingField: 8
+  <shotCount>k__BackingField: 2
+  <cone>k__BackingField: 10

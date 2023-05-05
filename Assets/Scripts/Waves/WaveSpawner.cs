@@ -213,7 +213,7 @@ public class WaveSpawner : MonoBehaviour
 
                 if (waveSpawned)
                 {
-                    waveSpawned.StartWave(enemyIndex, waveSpawnCount);
+                    waveSpawned.StartWave(enemyIndex, waveSpawnCount, Random.Range(0f,0.999f));
                     Debug.Log("wave spawn triggered with enemy index " + enemyIndex + " and count " + waveSpawnCount);
 
                     // subtract the strength of the spawned wave from the intensity accumulated
