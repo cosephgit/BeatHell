@@ -14,11 +14,13 @@ public class BaseCollisions : MonoBehaviour
     [SerializeField]private int scoreKill = 10;
     public int health { get; protected set; }
     protected bool alive;
+    protected bool invulnerable;
 
     private void Awake()
     {
         health = healthMax;
         alive = true;
+        invulnerable = false;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -40,7 +42,7 @@ public class BaseCollisions : MonoBehaviour
 
     public virtual void TakeDamage(int amount)
     {
-        if (alive)
+        if (alive && !invulnerable)
         {
             health -= amount;
             //Debug.Log(gameObject + " took " + bullet.damage + " damage - health left: " + health);
@@ -54,5 +56,12 @@ public class BaseCollisions : MonoBehaviour
         pop.Trigger(sprite.color, transform.localScale);
         StageManager.instance.AddScore(scoreKill);
         Destroy(gameObject);
+    }
+
+    public void SetVulnerable(bool vulnerable, Color spriteColor)
+    {
+        colliderPhysics.enabled = vulnerable;
+        invulnerable = !vulnerable;
+        sprite.color = spriteColor;
     }
 }

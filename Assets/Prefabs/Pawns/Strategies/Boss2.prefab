@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3859886326524462782}
   - component: {fileID: 3859886326524462783}
   m_Layer: 0
-  m_Name: 2SpinAndPop
+  m_Name: Boss2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,22 +45,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <loop>k__BackingField: 1
-  <count>k__BackingField: 4
+  <count>k__BackingField: 12
   moveMags:
-  - {x: 0, y: 2}
+  - {x: 6, y: -2}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  - {x: 0, y: -2}
-  moveBeatFracs: 05000000030000000300000005000000
+  - {x: -6, y: 2}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: -6, y: -2}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 6, y: 2}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  moveBeatFracs: 060000000600000006000000060000000600000006000000060000000600000006000000060000000600000006000000
   moveTurns:
-  - 0
-  - 0
-  - 0
-  - 0
+  - 180
+  - 270
+  - 270
+  - -180
+  - -270
+  - -270
+  - 180
+  - 270
+  - 270
+  - -180
+  - 270
+  - 270
   moveRotate:
   - 0
-  - -60
-  - 30
-  - -120
-  moveLerp: 00000000
-  moveShoot: 00000000
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  moveLerp: 010101010101010101010101
+  moveShoot: 010101010101010101010101

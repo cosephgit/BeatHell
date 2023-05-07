@@ -36,4 +36,9 @@ public class BaseStrategy : MonoBehaviour
     {
         return 0;
     }
+
+    public virtual bool Shooting(int step)
+    {
+        return true;
+    }
 }

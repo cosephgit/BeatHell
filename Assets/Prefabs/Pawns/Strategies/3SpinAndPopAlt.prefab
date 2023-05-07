@@ -57,15 +57,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3859886326524462783, guid: 22b17edecb733ec4ea6365cacaa79971, type: 3}
       propertyPath: moveRotate.Array.data[1]
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3859886326524462783, guid: 22b17edecb733ec4ea6365cacaa79971, type: 3}
       propertyPath: moveRotate.Array.data[2]
-      value: -20
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 3859886326524462783, guid: 22b17edecb733ec4ea6365cacaa79971, type: 3}
       propertyPath: moveRotate.Array.data[3]
-      value: 70
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22b17edecb733ec4ea6365cacaa79971, type: 3}

@@ -11,7 +11,7 @@ public class EnemyMovement : BaseMovement
     private Vector2 origin; // the point that this enemy is initially placed at, this is used by certain strategies
     protected BaseStrategy strategy;
     //private int moveCount;
-    private int moveStep = 0;
+    protected int moveStep = 0;
     private int beatFracCount = 0;
 
     protected override void Awake()
@@ -90,6 +90,11 @@ public class EnemyMovement : BaseMovement
                         else return; // make sure not to execute anything else if we've run out of moves
                     }
 
+                    if (shootComponent)
+                    {
+                        shootComponent.SetShooting(strategy.Shooting(moveStep));
+                    }
+
                     // if not lerping, snap by the new turn angle
                     transform.Rotate(0, 0, strategy.TurnInstant(moveStep));
                 }
@@ -105,11 +110,7 @@ public class EnemyMovement : BaseMovement
         beatFracCount = 0;
         if (shootComponent)
         {
-            LinearStrategy strategyLinear = strategy as LinearStrategy;
-            if (strategyLinear)
-            {
-                shootComponent.SetShooting(strategyLinear.Shoot(moveStep));
-            }
+            shootComponent.SetShooting(strategy.Shooting(moveStep));
         }
     }
 }
