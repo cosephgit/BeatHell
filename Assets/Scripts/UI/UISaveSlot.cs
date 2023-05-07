@@ -34,7 +34,7 @@ public class UISaveSlot : MonoBehaviour
     {
         slotNewGame.SetActive(true);
         slotLoadGame.SetActive(false);
-        slotText.text = "New game " + (slotIndex + 1);
+        slotText.text = "NEW GAME " + (slotIndex + 1);
         // the dropdown menu will default to the first (easy) setting on scene load, and we want this default, so set the stored difficulty to this value (0)
         GameManager.instance.SetSlotDifficulty(slotIndex, 0);
     }
@@ -46,9 +46,9 @@ public class UISaveSlot : MonoBehaviour
             slotNewGame.SetActive(false);
             slotLoadGame.SetActive(true);
             slotLoadDelete.SetActive(false);
-            slotText.text = "Load slot " + (slotIndex + 1);
-            slotStage.text = "Stage " + (GameManager.instance.stage[slotIndex] + 1);
-            slotScore.text = "Score " + GameManager.instance.score[slotIndex];
+            slotText.text = "LOAD GAME " + (slotIndex + 1);
+            slotStage.text = "STAGE " + (GameManager.instance.stage[slotIndex] + 1);
+            slotScore.text = "SCORE " + GameManager.instance.score[slotIndex];
             slotDifficulty.text = Global.ScoreName(GameManager.instance.difficulty[slotIndex]);
         }
         else

@@ -96,6 +96,8 @@ public class BaseShooting : MonoBehaviour
     // called every beat fraction
     protected virtual void BeatFractionShoot(int count)
     {
+        if (!BeatManager.instance.beating) return;
+
         if (isActiveAndEnabled)
         {
             if (beatFracsSinceShot == 0)
@@ -121,5 +123,10 @@ public class BaseShooting : MonoBehaviour
     protected virtual bool IsPlayer()
     {
         return false;
+    }
+
+    public void SetShooting(bool shootNow)
+    {
+        shooting = shootNow;
     }
 }

@@ -20,13 +20,23 @@ public class BaseMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        if (!BeatManager.instance.beating) return;
+
         if (move.magnitude > 0)
         {
             if (move.magnitude > 1f)
                 move = move.normalized; // if using both axis, normalize so they can't move faster just by going diagonally
 
             Vector2 moveFrame = move * speedTick;
-            transform.Translate(moveFrame);
+            if (MoveAbsolute())
+                transform.Translate(moveFrame, Space.World);
+            else
+                transform.Translate(moveFrame);
         }
+    }
+
+    protected virtual bool MoveAbsolute()
+    {
+        return false;
     }
 }

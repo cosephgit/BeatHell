@@ -28,7 +28,7 @@ public class UIMainMenu : MonoBehaviour
     {
         sliderVolume.value = GameManager.instance.volume;
         toggleEpilepsy.isOn = GameManager.instance.epilepsy;
-        scoreBoard.ShowScores(-1);
+        if (mainMenu) scoreBoard.ShowScores(-1);
     }
 
     public void ButtonPlay(System.Int32 slot)

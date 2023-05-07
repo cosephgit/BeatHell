@@ -26,6 +26,7 @@ public class BeatManager : MonoBehaviour
     private int beatFraction = 0;
     private int beat = 0;
     public static float bpm { get; private set; }
+    public bool beating { get; private set; } = false;
 
     private void Awake()
     {
@@ -70,6 +71,7 @@ public class BeatManager : MonoBehaviour
     private IEnumerator LateFixedUpdate()
     {
         yield return new WaitForSeconds(0.5f); // take a little time before starting the beat
+        beating = true;
         while (true)
         {
             yield return new WaitForFixedUpdate();

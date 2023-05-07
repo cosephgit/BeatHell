@@ -39,4 +39,9 @@ public class LinearStrategy : BaseStrategy
     {
         return moveBeatFracs[step];
     }
+
+    public bool Shoot(int step)
+    {
+        return moveShoot[step];
+    }
 }
