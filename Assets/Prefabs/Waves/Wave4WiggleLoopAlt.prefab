@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.2588191
+      value: 0.49999994
       objectReference: {fileID: 0}
     - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.9659258
+      value: -0.86602545
       objectReference: {fileID: 0}
     - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -37,11 +37,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2139706602650924022, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -150
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 2139706602650924023, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
       propertyPath: rotationMax
-      value: -120
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 2139706602650924023, guid: a5e3aacb6bdeaef4990d6ad1f5ec362b, type: 3}
       propertyPath: spawnStrategy

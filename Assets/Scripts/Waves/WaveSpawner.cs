@@ -31,9 +31,9 @@ public class WaveSpawner : MonoBehaviour
     // to comment this effectively I would need to attach an annotated spreadsheet, so don't mess with it
     // short story is it is the ideal adjusted intensity deficit in a stage, and since you don't understand what that means: don't mess with it
     // basically, if you MUST mess with it: bigger = less spawns, smaller = more spawns
-    private const float BASELINE = 40f; //29.94f;
+    private const float BASELINE = 35f; //29.94f;
     // this is much simpler - target wave size of 8 with a weak enemy at 1st stage max intensity (with a bit of buffer so it's still possible with imperfect timing)
-    private const float WAVESTRENGTHBASE = 4f;
+    private const float WAVESTRENGTHBASE = 5f;
     private float[] barIntensity; // a set of intensity values calculated for each bar in IntensityGenerator
     private int wavePrevious = -1; // the index of the last wave spawned (only relevant for the first spawn)
     private int barCounter = 0; // the count of bars in the current spawn cycle
@@ -45,7 +45,7 @@ public class WaveSpawner : MonoBehaviour
     // creates a stage intensity graph
     private void IntensityGenerator()
     {
-        difficulty = Global.DIFFBASE + (Global.DIFFMULT * (float)GameManager.instance.stage[GameManager.instance.slotActive]);
+        difficulty = GameManager.instance.GetDifficultyScalar();
 
         // new stage intensity graph calculation
         Vector2[] intensitySteps; // each intensity step has two values: the intensity (float 0...1) and the bar (int 0...)
@@ -151,89 +151,117 @@ public class WaveSpawner : MonoBehaviour
     private void Start()
     {
         BeatManager.onBar += StageBar;
+        stageSeed = GameManager.instance.stage[GameManager.instance.slotActive] + GameManager.instance.difficulty[GameManager.instance.slotActive];
         IntensityGenerator();
     }
 
+    // spawns a wave
+    private void SpawnWave()
+    {
+        int enemyIndex = 0;
+        int enemyIndexMin = 0;
+        int enemyIndexMax = 0;
+
+        // this sets the random seed in a predictable, repeating pattern alowing stages to be randomly generated but always in the same way
+        Random.InitState(stageSeed + barCurrent);
+        for (int i = 0; i < PrefabProvider.instance.enemyStrength.Length; i++)
+        {
+            // get the weakest and strongest enemy index that can be spawned at the current intensity
+            if (PrefabProvider.instance.enemyStrength[i] < barIntensity[barCurrent] * Global.DIFFSPAWNSCALEMAX)
+            {
+                enemyIndexMax = i;
+            }
+            if (PrefabProvider.instance.enemyStrength[i] < barIntensity[barCurrent] * Global.DIFFSPAWNSCALEMIN)
+            {
+                enemyIndexMin = i + 1;
+            }
+        }
+        if (enemyIndexMin > enemyIndexMax) enemyIndexMin = enemyIndexMax;
+
+        enemyIndex = Random.Range(enemyIndexMin, enemyIndexMax + 1);
+
+        // calculate the total wave strength for the current bar, and work out how many of the chosen enemies to spawn
+        float waveStrength = WAVESTRENGTHBASE * barIntensity[barCurrent];
+        int waveSpawnCount = Mathf.Clamp(Mathf.FloorToInt(waveStrength / PrefabProvider.instance.enemyStrength[enemyIndex]), waveMin, waveMax);
+
+        // avoid running the same wave twice in a row
+        int waveSelect;
+        if (wavePrevious == -1)
+        {
+            waveSelect = Random.Range(0, spawners.Length);
+            // first wave of the first stage: show the shoot hint
+            if (GameManager.instance.stage[GameManager.instance.slotActive] == 0)
+                UIMousePointer.instance.ShowHintShoot();
+        }
+        else
+        {
+            waveSelect = Random.Range(0, spawners.Length - 1);
+            if (waveSelect == wavePrevious) waveSelect++;
+        }
+        wavePrevious = waveSelect;
+
+        // place the spawner
+        EnemyPawnSpawner waveSpawned = Instantiate(spawners[waveSelect]);
+
+        if (waveSpawned)
+        {
+            waveSpawned.StartWave(enemyIndex, waveSpawnCount, Random.Range(0f,0.999f));
+            #if UNITY_EDITOR
+            Debug.Log("wave spawn triggered with enemy index " + enemyIndex + " and count " + waveSpawnCount);
+            #endif
+
+            // subtract the strength of the spawned wave from the intensity accumulated
+            intensityAccumulator -= (PrefabProvider.instance.enemyStrength[enemyIndex] * waveSpawnCount);
+
+            // update the UI with the spawn and increment the number of waves spawned
+            UIManager.instance.waveMarker.UpdateWave(waveCountSpawned + 1);
+            waveCountSpawned++;
+
+            barCounter = 0;
+        }
+    }
+
+    // called every beat from the BeatManager bar event
     private void StageBar()
     {
-        // at each bar, add the intensity of the current bar to the intensity accumulator
+        // show the move hint at the end of the first bar
+        if (GameManager.instance.stage[GameManager.instance.slotActive] == 0)
+            UIMousePointer.instance.ShowHintMove();
+
+        // check for end of stage
         if (barCurrent == barIntensity.Length)
         {
-            StageManager.instance.StageComplete();
+            // this is a fugly way of doing this
+            Object[] spawners = FindObjectsOfType<EnemyPawnSpawner>();
+            if (spawners.Length == 0)
+            {
+                // there are no waves spawned already
+                Object[] enemies = FindObjectsOfType<EnemyMovement>();
+                if (enemies.Length == 0)
+                {
+                    // and there are no enemies left, trigger stage end
+                    StageManager.instance.StageComplete();
+                    barCurrent++;
+                }
+            }
         }
         else if (barCurrent < barIntensity.Length) // check we're on a valid bar
         {
+            // at each bar, add the intensity of the current bar to the intensity accumulator
             float intensityThis = barIntensity[barCurrent];
             intensityAccumulator += intensityThis;
 
             // then if the intensityAccumulator is high enough and enough bars have passed, spawn a wave 
             if (barCounter >= waveBarPause && (intensityAccumulator > 0))
             {
-                Random.InitState(stageSeed + barCurrent);
-                // once the minimum number of bars between waves has passed, try to spawn a wave
-                int enemyIndex = 0;
-                int enemyIndexMin = 0;
-                int enemyIndexMax = 0;
-                for (int i = 0; i < PrefabProvider.instance.enemyStrength.Length; i++)
-                {
-                    // get the strongest enemy index that can be spawned at the current intensity
-                    if (PrefabProvider.instance.enemyStrength[i] < barIntensity[barCurrent] * Global.DIFFSPAWNSCALEMAX)
-                    {
-                        enemyIndexMax = i;
-                    }
-                    if (PrefabProvider.instance.enemyStrength[i] < barIntensity[barCurrent] * Global.DIFFSPAWNSCALEMIN)
-                    {
-                        enemyIndexMin = i + 1;
-                    }
-                }
-                if (enemyIndexMin < enemyIndexMax) enemyIndexMin = enemyIndexMax;
-                // if multiple possible enemies are possible at the current intensity, randomise amongst them
-                enemyIndex = Random.Range(enemyIndexMin, enemyIndexMax + 1);
-
-                // calculate the total wave strength for the current bar, and work out how many of the chosen enemies to spawn
-                float waveStrength = WAVESTRENGTHBASE * barIntensity[barCurrent];
-                int waveSpawnCount = Mathf.Clamp(Mathf.FloorToInt(waveStrength / PrefabProvider.instance.enemyStrength[enemyIndex]), waveMin, waveMax);
-
-                // avoid running the same wave twice in a row
-                int waveSelect;
-                if (wavePrevious == -1)
-                {
-                    waveSelect = Random.Range(0, spawners.Length);
-                    if (GameManager.instance.stage[GameManager.instance.slotActive] == 0)
-                        UIMousePointer.instance.ShowHintShoot();
-                }
-                else
-                {
-                    waveSelect = Random.Range(0, spawners.Length - 1);
-                    if (waveSelect == wavePrevious) waveSelect++;
-                }
-                wavePrevious = waveSelect;
-                // place the spawner and update the UI
-                EnemyPawnSpawner waveSpawned = Instantiate(spawners[Random.Range(0, spawners.Length)]);
-
-                if (waveSpawned)
-                {
-                    waveSpawned.StartWave(enemyIndex, waveSpawnCount, Random.Range(0f,0.999f));
-                    #if UNITY_EDITOR
-                    Debug.Log("wave spawn triggered with enemy index " + enemyIndex + " and count " + waveSpawnCount);
-                    #endif
-
-                    // subtract the strength of the spawned wave from the intensity accumulated
-                    intensityAccumulator -= (PrefabProvider.instance.enemyStrength[enemyIndex] * waveSpawnCount);
-
-                    // update the UI with the spawn and increment the number of waves spawned
-                    UIManager.instance.waveMarker.UpdateWave(waveCountSpawned + 1);
-                    waveCountSpawned++;
-
-                    barCounter = 0;
-                }
+                SpawnWave();
             }
             else
             {
                 barCounter++;
             }
+            barCurrent++;
         }
-        barCurrent++;
     }
 
     private void OnDestroy()

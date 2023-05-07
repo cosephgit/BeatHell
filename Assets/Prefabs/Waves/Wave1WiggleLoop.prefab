@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139706602650924025}
-  m_LocalRotation: {x: 0, y: 0, z: 0.9659258, w: 0.2588191}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.86602545, w: 0.49999994}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 150}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 120}
 --- !u!114 &2139706602650924023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,11 +55,12 @@ MonoBehaviour:
   sheetMusic: 01000000010000000100000000000000010000000000000001000000000000000100000000000000010000000000000001000000000000000100000000000000
   enemySpawnStartBar: 0
   enemySpawnDestroyBar: 4
-  enemyBeatFracDelay: 4
+  enemyBeatFracDelay: 2
   enemySpawnMax: 12
-  rotationMax: 120
+  rotationMax: 60
   spawnStrategy: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
-  spawnStrength: 0
+  spawnStrength: 6
+  menuMusicLoop: 0
 --- !u!82 &2139706602650924020
 AudioSource:
   m_ObjectHideFlags: 0

@@ -7,7 +7,9 @@ using UnityEngine;
 public class PlayerMagazine : BaseMagazine
 {
     [SerializeField]private Color shotExplosionColor = Color.yellow;
+    // TODO pretty janky to have these here they're duplicated from the PlayerShooting clas
     [SerializeField]private Layer shotExplosionLayer = Layer.PlayerBullet;
+    [SerializeField]private string shotExplosionSortLayer = Global.LAYERPLAYERBULLET;
     [Header("Shot explosion alert")]
     [SerializeField]private AudioSource shotExplosionSound;
     private List<Shot> shots;
@@ -56,7 +58,7 @@ public class PlayerMagazine : BaseMagazine
                 Quaternion bulletRotation = Quaternion.Euler(0, 0, angle);
                 Bullet bulletFired = BulletLibrary.instance.GetBullet();
 
-                bulletFired.Shoot(transform.position, bulletRotation, shots[i], shotExplosionColor, shotExplosionLayer, true);
+                bulletFired.Shoot(transform.position, bulletRotation, shots[i], shotExplosionColor, shotExplosionLayer, shotExplosionSortLayer, true);
                 //Debug.Log("<color=orange>WTF</color> bullet spawned at " + transform.position + " on frame " + Time.frameCount);
 
                 shots.RemoveAt(i);

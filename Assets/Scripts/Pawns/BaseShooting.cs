@@ -13,6 +13,7 @@ public class BaseShooting : MonoBehaviour
     [SerializeField]protected BaseMagazine magazine;
     [SerializeField]private Color shotColor = Color.yellow;
     [SerializeField]private Layer shotLayer = Layer.EnemyBullet;
+    [SerializeField]private string shotSortLayer = Global.LAYERENEMYBULLET;
     private ShotDetails shotSelected;
     private int beatFracsSinceShot;
     private float[] shotAngles;
@@ -46,7 +47,7 @@ public class BaseShooting : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         beatFracsSinceShot = shotSelected.beatFracsOffset;
         BeatManager.onBeatFrac += BeatFractionShoot;
@@ -66,7 +67,7 @@ public class BaseShooting : MonoBehaviour
 
                 if (shot)
                 {
-                    bulletFired.Shoot(transform.position, bulletRotation, shot, shotColor, shotLayer, IsPlayer());
+                    bulletFired.Shoot(transform.position, bulletRotation, shot, shotColor, shotLayer, shotSortLayer, IsPlayer());
                     ShotFired();
                 }
                 else
@@ -105,10 +106,11 @@ public class BaseShooting : MonoBehaviour
                     beatFracsSinceShot++;
                 }
             }
-            else
+            else if (beatFracsSinceShot > 0)
             {
                 beatFracsSinceShot++;
             }
+
             if (beatFracsSinceShot == shotSelected.beatFracsPerShot)
             {
                 beatFracsSinceShot = 0;

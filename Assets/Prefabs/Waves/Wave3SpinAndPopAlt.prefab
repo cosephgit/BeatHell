@@ -55,11 +55,12 @@ MonoBehaviour:
   sheetMusic: 00000000010000000000000001000000000000000100000002000000000000000000000001000000000000000100000000000000010000000100000001000000
   enemySpawnStartBar: 0
   enemySpawnDestroyBar: 6
-  enemyBeatFracDelay: 4
+  enemyBeatFracDelay: 2
   enemySpawnMax: 12
   rotationMax: -360
   spawnStrategy: {fileID: 7867704500834404316, guid: 791fc24e72c32f844bafa0c73304a9b8, type: 3}
-  spawnStrength: 1
+  spawnStrength: 2
+  menuMusicLoop: 0
 --- !u!82 &4175187704111847647
 AudioSource:
   m_ObjectHideFlags: 0

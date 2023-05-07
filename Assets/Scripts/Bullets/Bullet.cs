@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     private bool moving = false;
     float moveStart; // hacky hack hack
 
-    public void Shoot(Vector3 pos, Quaternion rot, Shot shot, Color shotColor, Layer shotLayer, bool player)
+    public void Shoot(Vector3 pos, Quaternion rot, Shot shot, Color shotColor, Layer shotLayer, string shotSortLayer, bool player)
     {
         float scale = shot.ShotScale();
         transform.parent = null;
@@ -28,6 +28,7 @@ public class Bullet : MonoBehaviour
         damage = shot.shotDamage;
         life = shot.shotLife;
         gameObject.layer = (int)shotLayer;
+        sprite.sortingLayerName = shotSortLayer;
         shotStored = shot;
         gameObject.SetActive(true);
         moving = true;

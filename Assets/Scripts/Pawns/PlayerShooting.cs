@@ -20,8 +20,10 @@ public class PlayerShooting : BaseShooting
     [SerializeField]private int absorbBeatFracsRecover = 12; // number of beat fractions before absorb is ready again
     [SerializeField]private float absorbRadius = 2f; // radius in which bullets are drawn
     [SerializeField]private float absorbPower = 4f; // speed at which bullets are drawn towards player
+    [SerializeField]private float justShotDelay = 0.1f; // time after firing a shot to ignore the fire button
     private bool absorbBullet = false; // is bullet absorbtion active?
     private int absorbBeatFracsDone = 0; // number of beat fractions that absorb has been running for
+    private float justShot = 0f; // add a short grace period after firing to ignore the fire button - makes it substantially easier to tap off single shots
 
     protected override void Awake()
     {
@@ -30,6 +32,17 @@ public class PlayerShooting : BaseShooting
         absorbReady.color = absorbStart;
         InitWeapon(0);
     }
+
+    protected override void Start()
+    {
+        base.Start();
+        if (justShotDelay >= BeatManager.beatFracFrames * Time.fixedDeltaTime * 0.5f)
+        {
+            justShotDelay = BeatManager.beatFracFrames * Time.fixedDeltaTime * 0.5f;
+            Debug.Log("justShotDelay adjusted to " + justShotDelay);
+        }
+    }
+
     protected override void Shoot()
     {
         base.Shoot();
@@ -41,6 +54,7 @@ public class PlayerShooting : BaseShooting
         shootSound.Play();
         if (magazine.Empty() && GameManager.instance.stage[GameManager.instance.slotActive] == 0)
             UIMousePointer.instance.ShowHintAbsorb();
+        justShot = justShotDelay;
     }
 
     void FixedUpdate()
@@ -75,7 +89,8 @@ public class PlayerShooting : BaseShooting
                 absorbBullet = true; // start absorbing bullets
                 shooting = false;
             }
-            else if (Input.GetButton("Fire1")) shooting = true; // only sets shooting to true, so the player can tap shoot and will still fire on their next shoot beat
+            else if (justShot <= 0 && Input.GetButton("Fire1")) shooting = true; // only sets shooting to true, so the player can tap shoot and will still fire on their next shoot beat
+
             if (shooting)
             {
                 // prepare to shoot in the direction of the mouse pointer
@@ -83,6 +98,8 @@ public class PlayerShooting : BaseShooting
                 shotFacing = Mathf.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
             }
         }
+        if (justShot > 0)
+            justShot -= Time.deltaTime;
     }
 
     protected override void BeatFractionShoot(int count)

@@ -57,27 +57,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
       propertyPath: moveTurns.Array.data[0]
-      value: -40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
       propertyPath: moveTurns.Array.data[1]
-      value: -20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
       propertyPath: moveTurns.Array.data[2]
-      value: -20
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
       propertyPath: moveTurns.Array.data[3]
-      value: -40
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
       propertyPath: moveTurns.Array.data[4]
-      value: -20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
       propertyPath: moveTurns.Array.data[5]
       value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
+      propertyPath: moveMags.Array.data[0].x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
+      propertyPath: moveMags.Array.data[1].x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
+      propertyPath: moveMags.Array.data[2].x
+      value: 4.832182
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
+      propertyPath: moveMags.Array.data[3].x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859886326524462783, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}
+      propertyPath: moveMags.Array.data[4].x
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f20b3db9c529b74dbc02290d56e64fe, type: 3}

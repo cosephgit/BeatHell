@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -203,7 +203,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7256519241500197734, guid: c127b8d6fc0383845b250e71fa9daf24, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ButtonQuit
+      value: ButtonQuitToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256519241500197734, guid: c127b8d6fc0383845b250e71fa9daf24, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIInGameMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7256519241500197735, guid: c127b8d6fc0383845b250e71fa9daf24, type: 3}
       propertyPath: m_Pivot.x

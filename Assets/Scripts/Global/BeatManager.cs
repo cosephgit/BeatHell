@@ -61,7 +61,9 @@ public class BeatManager : MonoBehaviour
         {
             BPMToBeatFrames(GameManager.instance.GetBPM());
         }
+        #if UNITY_EDITOR
         Debug.Log("actual bpm is " + bpm);
+        #endif
     }
 
     // we want to make ABSOLUTELY SURE that the count always happens at the same point in the frame, in this case it will always happen after everything else

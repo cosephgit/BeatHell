@@ -11,12 +11,15 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField]private AudioMixer audioMixer;
     [SerializeField]private int[] difficultyBPM = new int[3] { 125, 150, 190 };
+    [field: SerializeField]public int stageFinal { get; private set; } = 9;
     public float volume { get; private set; }
     public bool epilepsy { get; private set; }
     public int[] stage { get; private set; } = new int[Global.SAVESLOTS];
     public int[] difficulty { get; private set; } = new int[Global.SAVESLOTS];
     public int[] score { get; private set; } = new int[Global.SAVESLOTS];
     public int slotActive { get; private set; } = 0;
+    public int[] scoresHigh { get; private set; } = new int[Global.SCORESLOTS];
+    public int scoreFinal { get; private set; } = 0; // only used on completion of the final stage
 
     private void Awake()
     {
@@ -42,6 +45,11 @@ public class GameManager : MonoBehaviour
             stage[i] = PlayerPrefs.GetInt(SlotKeySyntax(Global.SAVESTAGE, i), 0);
             difficulty[i] = PlayerPrefs.GetInt(SlotKeySyntax(Global.SAVEDIFFICULTY, i), 0);
             score[i] = PlayerPrefs.GetInt(SlotKeySyntax(Global.SAVESCORE, i), 0);
+        }
+
+        for (int i = 0; i < Global.SCORESLOTS; i++)
+        {
+            scoresHigh[i] = PlayerPrefs.GetInt(SlotKeySyntax(Global.SAVEHISCORE, i), 0);
         }
     }
 
@@ -82,9 +90,16 @@ public class GameManager : MonoBehaviour
         return decibels;
     }
 
+    public void FinalStageComplete(int scoreGain)
+    {
+        scoreFinal = score[slotActive] + scoreGain;
+    }
     public void ProgressStage(int scoreGain)
     {
-        stage[slotActive]++;
+        if (stage[slotActive] < stageFinal)
+        {
+            stage[slotActive]++;
+        }
         PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVESTAGE, slotActive), stage[slotActive]);
         score[slotActive] += scoreGain;
         PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVESCORE, slotActive), score[slotActive]);
@@ -127,5 +142,37 @@ public class GameManager : MonoBehaviour
     {
         difficulty[slot] = diff;
         PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVEDIFFICULTY, slot), diff);
+    }
+
+    // saves the end game score when the game is finished, and returns the index of the score position (-1 means no new high score)
+    public int NewFinalScore(int scoreNew)
+    {
+        int scoreIndex = 0;
+
+        for (int i = 0; i < Global.SCORESLOTS; i++)
+        {
+            if (scoreNew <= scoresHigh[i]) scoreIndex = i + 1;
+        }
+
+        if (scoreIndex == Global.SCORESLOTS) scoreIndex = -1;
+        else
+        {
+            // demote all the scores from this slot down by one slot
+            for (int i = Global.SCORESLOTS - 1; i > scoreIndex; i--)
+            {
+                scoresHigh[i] = scoresHigh[i - 1];
+                PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVEHISCORE, i), scoresHigh[i]);
+            }
+            // set the new score
+            scoresHigh[scoreIndex] = scoreNew;
+            PlayerPrefs.SetInt(SlotKeySyntax(Global.SAVEHISCORE, scoreIndex), scoreNew);
+        }
+
+        return scoreIndex;
+    }
+
+    public float GetDifficultyScalar()
+    {
+        return (Global.DIFFBASE + (Global.DIFFMULT * (float)stage[slotActive]));
     }
 }

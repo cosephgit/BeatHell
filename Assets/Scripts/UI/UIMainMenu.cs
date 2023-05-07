@@ -15,6 +15,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField]private GameObject screenQuit;
     [SerializeField]private Slider sliderVolume;
     [SerializeField]private Toggle toggleEpilepsy;
+    [SerializeField]private UIScoreBoard scoreBoard;
     private bool mainMenu;
 
     void Awake()
@@ -27,6 +28,7 @@ public class UIMainMenu : MonoBehaviour
     {
         sliderVolume.value = GameManager.instance.volume;
         toggleEpilepsy.isOn = GameManager.instance.epilepsy;
+        scoreBoard.ShowScores(-1);
     }
 
     public void ButtonPlay(System.Int32 slot)

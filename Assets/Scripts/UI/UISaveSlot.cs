@@ -20,7 +20,6 @@ public class UISaveSlot : MonoBehaviour
     // slot type
     [SerializeField]private int slotIndex; // the numerical index for this save slot MUST BE LESS THAN Global.SAVESLOTS!!!
     [SerializeField]private float slotDeleteDuration = 3f; // duration of the slot delete confirmation box
-    private string[] diffName = new string[3] { "Casual (125BPM)", "Intense (150BPM)", "Nightmare (190BPM)" }; // kinda hacky duplication of difficulty name data
 
     private void Awake()
     {
@@ -50,7 +49,7 @@ public class UISaveSlot : MonoBehaviour
             slotText.text = "Load slot " + (slotIndex + 1);
             slotStage.text = "Stage " + (GameManager.instance.stage[slotIndex] + 1);
             slotScore.text = "Score " + GameManager.instance.score[slotIndex];
-            slotDifficulty.text = diffName[GameManager.instance.difficulty[slotIndex]];
+            slotDifficulty.text = Global.ScoreName(GameManager.instance.difficulty[slotIndex]);
         }
         else
         {

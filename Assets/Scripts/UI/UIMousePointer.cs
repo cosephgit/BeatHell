@@ -20,6 +20,7 @@ public class UIMousePointer : MonoBehaviour
     [SerializeField]private Color colorAlt = Color.magenta;
     private bool color;
     private bool hintActive = false; // make sure not to trigger a new hint until the existing one is done
+    private bool hintMoveNew = true; // there are multiple places that can trigger the hintAbsorb so need to make sure its only triggered once
     private bool hintAbsorbNew = true; // there are multiple places that can trigger the hintAbsorb so need to make sure its only triggered once
     private int beatCount = 0;
 
@@ -84,7 +85,11 @@ public class UIMousePointer : MonoBehaviour
     // this is triggered at the start of the first stage
     public void ShowHintMove()
     {
-        StartCoroutine(HintShow(hintMove));
+        if (hintMoveNew)
+        {
+            hintMoveNew = false;
+            StartCoroutine(HintShow(hintMove));
+        }
     }
 
     // this is triggered in the first stage when the first wave is spawned

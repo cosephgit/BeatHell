@@ -34,16 +34,17 @@ public class StageManager : MonoBehaviour
 
     void Start()
     {
+        int stage = GameManager.instance.stage[GameManager.instance.slotActive];
         MenuClose();
-        UIManager.instance.waveMarker.SetStage(GameManager.instance.stage[GameManager.instance.slotActive]);
-        UIManager.instance.stageBox.UpdateWave(GameManager.instance.stage[GameManager.instance.slotActive] + 1);
-        if (GameManager.instance.stage[GameManager.instance.slotActive] == 0)
-            UIMousePointer.instance.ShowHintMove();
+        UIManager.instance.waveMarker.SetStage(stage);
+        UIManager.instance.stageBox.UpdateWave(stage + 1, (stage == GameManager.instance.stageFinal));
     }
 
     public void AddScore(int bonus)
     {
-        score += Mathf.CeilToInt(bonus * (Global.SCOREBASE + (GameManager.instance.GetDiff() * Global.SCOREDIFF)));
+        float scoreModified = bonus * (Global.SCOREBASE + (GameManager.instance.GetDiff() * Global.SCOREDIFF));
+        scoreModified *= GameManager.instance.GetDifficultyScalar();
+        score += Mathf.CeilToInt(scoreModified);
         UIManager.instance.scoreBox.UpdateScore(score);
     }
 

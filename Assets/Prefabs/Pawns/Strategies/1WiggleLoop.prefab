@@ -45,28 +45,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <loop>k__BackingField: 1
-  <count>k__BackingField: 4
+  <count>k__BackingField: 5
   moveMags:
-  - {x: 0, y: 2}
   - {x: 2, y: 0}
   - {x: 2, y: 0}
-  - {x: 0, y: -2}
-  - {x: -2, y: 0}
-  - {x: -2, y: 0}
-  moveBeatFracs: 040000000200000002000000040000000200000002000000
+  - {x: -4.832182, y: 0}
+  - {x: 2, y: 0}
+  - {x: 2, y: 0}
+  moveBeatFracs: 0300000003000000040000000300000003000000
   moveTurns:
-  - 40
-  - 20
-  - 20
-  - 40
-  - 20
-  - 20
+  - -60
+  - -40
+  - 70
+  - 70
+  - -40
   moveRotate:
   - 0
   - 0
   - 0
   - 0
   - 0
-  - 0
-  moveLerp: 000000000000
-  moveShoot: 000000000000
+  moveLerp: 0000000000
+  moveShoot: 0000000000
