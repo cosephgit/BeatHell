@@ -39,7 +39,7 @@ public class BackgroundPulse : MonoBehaviour
 
         bgColor.a = bgStrength * bgStrengthScale;
 
-        if (GameManager.instance.epilepsy) bgColor.a *= 0.3f; // reduced flash brightness in epilepsy-safe mode
+        if (GameManager.instance.epilepsy) bgColor.a *= Global.EPILEPSYREDUCTION; // reduced flash brightness in epilepsy-safe mode
 
         backgroundSprite.color = bgColor;
 

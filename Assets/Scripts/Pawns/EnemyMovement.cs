@@ -57,7 +57,7 @@ public class EnemyMovement : BaseMovement
         else
             move = Vector2.zero;
 
-        Debug.Log("moving " + move);
+        //Debug.Log("moving " + move);
     }
 
     private void OnDestroy()
@@ -72,7 +72,7 @@ public class EnemyMovement : BaseMovement
 
         if (isActiveAndEnabled)
         {
-            Debug.Log("beatFracCount " + beatFracCount + " moveStep " + moveStep);
+            //Debug.Log("beatFracCount " + beatFracCount + " moveStep " + moveStep);
             beatFracCount++;
             if (strategy)
             {

@@ -32,6 +32,8 @@ public static class Global
     public const float DIFFSPAWNSCALEMAX = 1.5f; // the largest enemy strength spawned as a multiple of current bar intensity
     public const int SAVESLOTS = 3;
     public const int SCORESLOTS = 10; // the number of high score positions
+    // visual settings
+    public const float EPILEPSYREDUCTION = 0.1f;
     // save keys - must be unique
     public const string SAVEVOLUME = "Volume";
     public const string SAVEEPILEPSY = "Epilepsy";

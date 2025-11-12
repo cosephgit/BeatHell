@@ -30,6 +30,8 @@ public class PlayerShooting : BaseShooting
         base.Awake();
         absorbReady.enabled = true;
         absorbReady.color = absorbStart;
+        absorbArea.enabled = false;
+        absorbArea.color = absorbStart;
         InitWeapon(0);
     }
 
